@@ -35,7 +35,7 @@ local opts =  {
   sections = {
     lualine_a = {'mode'},
     lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {'filename'},
+    lualine_c = {'buffers'},
     lualine_x = {'encoding', 'fileformat', 'filetype'},
     lualine_y = {'progress'},
     lualine_z = {'location'}
@@ -51,7 +51,8 @@ local opts =  {
   tabline = {},
   winbar = {},
   inactive_winbar = {},
-  extensions = {}
+  extensions = {},
+  theme = 'everforest'
 }
 return {
     'nvim-lualine/lualine.nvim',
