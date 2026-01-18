@@ -1,3 +1,8 @@
+-- leader
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
+-- lazy
 require("config.lazy")
 
 -- use system clipboard
@@ -6,11 +11,9 @@ vim.schedule(function()
 end)
 
 -- preferences
-
 vim.opt.shiftwidth = 4
 
 -- useful stuff
-
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.undofile = true
@@ -25,7 +28,6 @@ vim.diagnostic.config({
 })
 
 -- lsp stuff
-
 vim.lsp.config(
     'lua_ls',
     {settings = {Lua = {diagnostics = {globals = {"vim"}}}}}
@@ -37,10 +39,11 @@ vim.lsp.config(
 )
 
 -- easier split nav
-
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
-
+-- switching buffers
+vim.keymap.set('n', '<leader>p', ':bp<CR>', { desc = 'Move to previous buffer' })
+vim.keymap.set('n', '<leader>n', ':bn<CR>', { desc = 'Move to next buffer' })
