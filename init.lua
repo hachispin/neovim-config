@@ -3,7 +3,34 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- lazy
-require("config.lazy")
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
+end
+vim.opt.rtp:prepend(lazypath)
+
+-- Make sure to setup `mapleader` and `maplocalleader` before
+-- loading lazy.nvim so that mappings are correct.
+-- This is also a good place to setup other settings (vim.opt)
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
+-- Setup lazy.nvim
+require("lazy").setup({
+  spec = {{ import = "plugins" }},
+  install = { colorscheme = { "everforest" }},
+  checker = { enabled = true },
+})
 
 -- use system clipboard
 vim.schedule(function()
@@ -30,12 +57,18 @@ vim.diagnostic.config({
 -- lsp stuff
 vim.lsp.config(
     'lua_ls',
-    {settings = {Lua = {diagnostics = {globals = {"vim"}}}}}
+    { settings = { Lua = { diagnostics = { globals = { "vim" }}}}}
 )
 
 vim.lsp.config(
     'rust_analyzer',
-    {settings = {Rust = {checkOnSave = true, check = { enable = true, command = 'clippy'}}}}
+    { settings = { Rust = {
+	checkOnSave = true,
+	check = {
+	    enable = true,
+	    command = 'clippy --pedantic'
+	}}
+    }}
 )
 
 -- easier split nav
@@ -47,3 +80,16 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- switching buffers
 vim.keymap.set('n', '<leader>p', ':bp<CR>', { desc = 'Move to previous buffer' })
 vim.keymap.set('n', '<leader>n', ':bn<CR>', { desc = 'Move to next buffer' })
+
+-- lsp renaming but rename field is left blank, instead of having 
+-- the original name (which is annoying to edit since it's in cmdline)
+vim.keymap.set('n', '<leader>r', function()
+    vim.api.nvim_create_autocmd({ "CmdlineEnter" }, {
+        callback = function()
+            local key = vim.api.nvim_replace_termcodes("<C-u>", true, false, true)
+            vim.api.nvim_feedkeys(key, "c", false)
+            return true
+        end,
+    })
+    vim.lsp.buf.rename()
+end, { desc = 'Rename current item under cursor with LSP' })
