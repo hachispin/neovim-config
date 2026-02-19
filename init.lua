@@ -57,21 +57,6 @@ vim.diagnostic.config({
 -- lsp stuff
 vim.lsp.config("lua_ls", { settings = { Lua = { diagnostics = { globals = { "vim" } } } } })
 
-vim.lsp.config(
-	"rust_analyzer",
-	{
-		settings = {
-			Rust = {
-				checkOnSave = true,
-				check = {
-					enable = true,
-					command = "clippy --pedantic",
-				},
-			},
-		},
-	}
-)
-
 -- easier split nav
 vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
 vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
