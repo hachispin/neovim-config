@@ -48,14 +48,24 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.updatetime = 300
 vim.o.scrolloff = 10
-vim.o.showmode = false
+vim.o.showmode = true
 vim.diagnostic.enable = true
 vim.diagnostic.config({
 	virtual_lines = true,
 })
 
 -- lsp stuff
-vim.lsp.config("lua_ls", { settings = { Lua = { diagnostics = { globals = { "vim" } } } } })
+vim.lsp.config("lua_ls", { settings = { Lua = { diagnostics = { globals = { "vim" } } } } }, "rust_analyzer", {
+	settings = {
+		Rust = {
+			checkOnSave = true,
+			check = {
+				enable = true,
+				command = "clippy --pedantic",
+			},
+		},
+	},
+})
 
 -- easier split nav
 vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
