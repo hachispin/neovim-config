@@ -23,7 +23,7 @@ vim.opt.rtp:prepend(lazypath)
 -- loading lazy.nvim so that mappings are correct.
 -- This is also a good place to setup other settings (vim.opt)
 vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+vim.g.maplocalleader = "."
 
 -- Setup lazy.nvim
 require("lazy").setup({
@@ -55,18 +55,7 @@ vim.diagnostic.config({
 })
 
 -- lsp stuff
-vim.lsp.config("lua_ls", { settings = { Lua = { diagnostics = { globals = { "vim" } } } } }, "rust_analyzer", {
-	settings = {
-		Rust = {
-			checkOnSave = true,
-			check = {
-				enable = true,
-				command = "clippy --pedantic",
-			},
-		},
-	},
-})
-
+vim.lsp.config("lua_ls", { settings = { Lua = { diagnostics = { globals = { "vim" } } } } })
 -- easier split nav
 vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
 vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
@@ -76,6 +65,9 @@ vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper win
 -- switching buffers
 vim.keymap.set("n", "<leader>p", ":bp<CR>", { desc = "Move to previous buffer" })
 vim.keymap.set("n", "<leader>n", ":bn<CR>", { desc = "Move to next buffer" })
+
+-- view diagnostic
+vim.keymap.set("n", "<leader>v", ":lua vim.diagnostic.open_float()<CR>")
 
 -- lsp renaming but rename field is left blank, instead of having
 -- the original name (which is annoying to edit since it's in cmdline)
