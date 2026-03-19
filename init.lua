@@ -28,7 +28,7 @@ vim.g.maplocalleader = "."
 -- Setup lazy.nvim
 require("lazy").setup({
 	spec = { { import = "plugins" } },
-	install = { colorscheme = { "gruvbox-material" } },
+	install = { colorscheme = { "everforest" } },
 	checker = { enabled = true },
 })
 
@@ -56,6 +56,7 @@ vim.diagnostic.config({
 
 -- lsp stuff
 vim.lsp.config("lua_ls", { settings = { Lua = { diagnostics = { globals = { "vim" } } } } })
+
 -- easier split nav
 vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
 vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
