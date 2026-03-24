@@ -17,6 +17,7 @@ local opts = {
 		javascript = { "prettierd", "prettier", stop_after_first = true },
 		markdown = { "prettier" },
 		c = { "clang-format" },
+		cpp = { "clang-format" },
 	},
 }
 
