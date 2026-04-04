@@ -26,13 +26,10 @@ require("lazy").setup({
 	checker = { enabled = true },
 })
 
--- use system clipboard
-vim.schedule(function()
-	vim.o.clipboard = "unnamedplus"
-end)
-
 -- preferences
 vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
+vim.g.terminal_emulator = "wezterm"
 
 -- useful stuff
 vim.o.number = true

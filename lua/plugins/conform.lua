@@ -4,10 +4,10 @@ local opts = {
 		-- You can customize some of the format options for the filetype (:help conform.format)
 		-- Conform will run the first available formatter
 		lua = { "stylua" },
-		python = { "isort", "black" },
-		rust = { "rustfmt", lsp_format = "fallback" },
-		javascript = { "prettierd", "prettier", stop_after_first = true },
-		markdown = { "prettier" },
+		-- python = { "ruff" },
+		rust = { "rustfmt" },
+		javascript = { "prettierd" },
+		markdown = { "prettierd" },
 		c = { "clang-format" },
 		cpp = { "clang-format" },
 	},
