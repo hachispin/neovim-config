@@ -61,6 +61,13 @@ vim.keymap.set("n", "<leader>n", ":bn<CR>", { desc = "Move to next buffer" })
 -- view diagnostic
 vim.keymap.set("n", "<leader>v", ":lua vim.diagnostic.open_float()<CR>")
 
+-- system clipboard
+vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "Yank to system clipboard" })
+vim.keymap.set("n", "<leader>yy", '"+yy', { desc = "Yank line to system clipboard" })
+vim.keymap.set("n", "<leader>Y", '"+Y', { desc = "Yank to end of line to system clipboard" })
+vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', { desc = "Put from system clipboard (after)" })
+vim.keymap.set({ "n", "v" }, "<leader>P", '"+P', { desc = "Put from system clipboard (before)" })
+
 -- lsp renaming but rename field is left blank, instead of having
 -- the original name (which is annoying to edit since it's in cmdline)
 vim.keymap.set("n", "<leader>r", function()
