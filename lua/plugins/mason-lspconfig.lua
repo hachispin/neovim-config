@@ -2,9 +2,12 @@ return {
 	"mason-org/mason-lspconfig.nvim",
 	opts = {
 		ensure_installed = {
+			"basedpyright",
+			"ruff",
 			"lua_ls",
 			"bashls",
 			"clangd",
+			"csharp_ls",
 		},
 		automatic_enable = {
 			exclude = {
