@@ -26,7 +26,8 @@ require("lazy").setup({
 })
 
 vim.opt.shiftwidth = 4 -- amount to shift (<</>>)
-vim.opt.tabstop = 4 -- size of tab
+vim.opt.tabstop = 4 -- visual size of tab (in spaces)
+vim.opt.showmode = false -- don't show mode (e.g, INSERT) because i use lualine
 vim.o.relativenumber = true -- lines numbers shown relative to the cursor
 vim.o.undofile = true -- save undo history to file for persistence
 vim.o.smartcase = true -- case-insensitive search unless search includes uppercase characters
@@ -86,4 +87,5 @@ if vim.g.neovide then
 	vim.o.guifont = "Maple Mono Normal:h14"
 	vim.g.neovide_opacity = 0.8
 	vim.g.neovide_refresh_rate = 60
+	vim.g.neovide_padding_top = 12
 end
