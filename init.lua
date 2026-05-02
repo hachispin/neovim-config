@@ -80,3 +80,10 @@ vim.keymap.set("n", "<leader>r", function()
 
 	vim.lsp.buf.rename()
 end, { desc = "Rename current item under cursor with LSP" })
+
+-- neovide specific things (tuis are not the future i'm sorry)
+if vim.g.neovide then
+	vim.o.guifont = "Maple Mono Normal:h14"
+	vim.g.neovide_opacity = 0.8
+	vim.g.neovide_refresh_rate = 60
+end
