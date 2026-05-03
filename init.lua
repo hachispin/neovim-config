@@ -29,11 +29,16 @@ vim.opt.shiftwidth = 4 -- amount to shift (<</>>)
 vim.opt.tabstop = 4 -- visual size of tab (in spaces)
 vim.opt.showmode = false -- don't show mode (e.g, INSERT) because i use lualine
 vim.o.relativenumber = true -- lines numbers shown relative to the cursor
+
+-- show line number (with relative enabled, this shows the line number
+-- of the current line you're on, which would otherwise just be "0")
+vim.o.number = true
+
 vim.o.undofile = true -- save undo history to file for persistence
 vim.o.smartcase = true -- case-insensitive search unless search includes uppercase characters
 vim.o.updatetime = 300 -- makes events more responsive (300ms)
 vim.o.scrolloff = 10 -- keep 10 lines above and below cursor
-vim.diagnostic.enable = true -- enable diagnostics... duh
+vim.diagnostic.enable(true) -- enable diagnostics (though it should be on by default)
 vim.diagnostic.config({ -- show warnings as extra ("virtual") lines
 	virtual_lines = true,
 })
@@ -84,8 +89,25 @@ end, { desc = "Rename current item under cursor with LSP" })
 
 -- neovide specific things (tuis are not the future i'm sorry)
 if vim.g.neovide then
+	vim.g.neovide_scale_factor = 1.0
 	vim.o.guifont = "Maple Mono Normal:h14"
 	vim.g.neovide_opacity = 0.8
 	vim.g.neovide_refresh_rate = 60
 	vim.g.neovide_padding_top = 12
+	vim.g.neovide_cursor_cell_color_fallback = false
+
+	-- allow for zooming
+	local sf = 1.125
+
+	local change_scale_factor = function(delta)
+		vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
+	end
+
+	vim.keymap.set("n", "<C-=>", function()
+		change_scale_factor(sf)
+	end)
+
+	vim.keymap.set("n", "<C-->", function()
+		change_scale_factor(1 / sf)
+	end)
 end
