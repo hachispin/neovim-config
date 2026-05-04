@@ -1,9 +1,11 @@
 return {
-	"sainnhe/gruvbox-material",
+	"sainnhe/everforest",
 	lazy = false,
 	priority = 1000,
 	config = function()
-		vim.g.gruvbox_material_enable_italic = true
-		vim.cmd.colorscheme("gruvbox-material")
+		vim.g.everforest_enable_italic = true
+		vim.g.everforest_background = "soft"
+		vim.g.everforest_better_performance = 1
+		vim.cmd.colorscheme("everforest")
 	end,
 }

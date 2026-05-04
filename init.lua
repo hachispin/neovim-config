@@ -21,9 +21,14 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	spec = { { import = "plugins" } },
-	install = { colorscheme = { "gruvbox-material" } },
+	install = { colorscheme = { "everforest" } },
 	checker = { enabled = true },
 })
+
+-- a poor man's bufferline gutter, follows everforest scheme
+vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#7A8478" })
+vim.api.nvim_set_hl(0, "LineNr", { fg = "#9DA9A0", bold = true })
+vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#7A8478" })
 
 vim.opt.shiftwidth = 4 -- amount to shift (<</>>)
 vim.opt.tabstop = 4 -- visual size of tab (in spaces)
@@ -38,6 +43,7 @@ vim.o.undofile = true -- save undo history to file for persistence
 vim.o.smartcase = true -- case-insensitive search unless search includes uppercase characters
 vim.o.updatetime = 300 -- makes events more responsive (300ms)
 vim.o.scrolloff = 10 -- keep 10 lines above and below cursor
+vim.o.cmdheight = 0 -- hide cmdline when not being used
 vim.diagnostic.enable(true) -- enable diagnostics (though it should be on by default)
 vim.diagnostic.config({ -- show warnings as extra ("virtual") lines
 	virtual_lines = true,
@@ -87,16 +93,26 @@ vim.keymap.set("n", "<leader>r", function()
 	vim.lsp.buf.rename()
 end, { desc = "Rename current item under cursor with LSP" })
 
--- neovide specific things (tuis are not the future i'm sorry)
+-- neovide specific things (i've betrayed TUIs)
 if vim.g.neovide then
-	vim.g.neovide_scale_factor = 1.0
 	vim.o.guifont = "Maple Mono Normal:h14"
-	vim.g.neovide_opacity = 0.8
-	vim.g.neovide_refresh_rate = 60
-	vim.g.neovide_padding_top = 12
-	vim.g.neovide_cursor_cell_color_fallback = false
+	vim.g.neovide_profiler = false
 
-	-- allow for zooming
+	-- window settings --
+	vim.g.neovide_scale_factor = 1.0
+	vim.g.neovide_opacity = 0.8
+	vim.g.neovide_padding_top = 12
+	vim.g.neovide_refresh_rate = 120 -- only applies if --no-vsync is passed
+
+	-- cursor settings --
+	vim.g.neovide_cursor_cell_color_fallback = true
+	--[[
+	vim.g.neovide_cursor_animation_length = 0.1
+    vim.g.neovide_cursor_trail_size = 0.3
+	vim.g.neovide_scroll_animation_length = 0.3
+	--]]
+
+	-- zooming implementation --
 	local sf = 1.125
 
 	local change_scale_factor = function(delta)
