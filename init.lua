@@ -2,7 +2,7 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "."
 
--- lazy
+-- lazy setup
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -29,6 +29,7 @@ require("lazy").setup({
 vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#7A8478" })
 vim.api.nvim_set_hl(0, "LineNr", { fg = "#9DA9A0", bold = true })
 vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#7A8478" })
+--
 
 vim.opt.shiftwidth = 4 -- amount to shift (<</>>)
 vim.opt.tabstop = 4 -- visual size of tab (in spaces)
@@ -51,12 +52,14 @@ vim.diagnostic.config({ -- show warnings as extra ("virtual") lines
 
 -- shut up lua
 vim.lsp.config("lua_ls", { settings = { Lua = { diagnostics = { globals = { "vim" } } } } })
+--
 
--- easier split nav (even though i don't use it)
+-- easier split nav, <C-[hjkl]>
 vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
 vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
+--
 
 -- switching buffers with <-,.->
 vim.keymap.set("n", "<leader>,", function()
@@ -66,11 +69,13 @@ end, { desc = "Move to previous buffer" })
 vim.keymap.set("n", "<leader>.", function()
 	vim.cmd.bn()
 end, { desc = "Move to next buffer" })
+--
 
 -- view diagnostic
 vim.keymap.set("n", "<leader>v", function()
 	vim.diagnostic.open_float()
 end)
+--
 
 -- yank/put with/from system clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "Yank to system clipboard" })
@@ -78,6 +83,7 @@ vim.keymap.set("n", "<leader>yy", '"+yy', { desc = "Yank line to system clipboar
 vim.keymap.set("n", "<leader>Y", '"+Y', { desc = "Yank to end of line to system clipboard" })
 vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', { desc = "Put from system clipboard (after)" })
 vim.keymap.set({ "n", "v" }, "<leader>P", '"+P', { desc = "Put from system clipboard (before)" })
+--
 
 -- lsp rename (note: must run :wa after)
 vim.keymap.set("n", "<leader>r", function()
@@ -92,15 +98,52 @@ vim.keymap.set("n", "<leader>r", function()
 
 	vim.lsp.buf.rename()
 end, { desc = "Rename current item under cursor with LSP" })
+--
+
+-- black background toggle, mostly for better looks when setting transparency --
+-- courtesy of chatgpt so like 50% chance of being slop
+local groups = {
+	"Normal",
+	"NormalNC",
+	"SignColumn",
+	"EndOfBuffer",
+}
+
+local saved = {}
+local enabled = false
+
+for _, group in ipairs(groups) do
+	saved[group] = vim.api.nvim_get_hl(0, { name = group })
+end
+
+vim.keymap.set("n", "<leader>b", function()
+	enabled = not enabled
+
+	for _, group in ipairs(groups) do
+		if enabled then
+			local hl = saved[group]
+
+			vim.api.nvim_set_hl(0, group, {
+				fg = hl.fg,
+				bg = "#000000",
+			})
+		else
+			vim.api.nvim_set_hl(0, group, saved[group])
+		end
+	end
+end)
+--
+
+vim.api.nvim_set_hl(0, "Normal", { fg = vim.api.nvim_get_hl(0, { name = "Normal" }).fg, bg = "black" })
 
 -- neovide specific things (i've betrayed TUIs)
 if vim.g.neovide then
-	vim.o.guifont = "Maple Mono Normal:h14"
-	vim.g.neovide_profiler = false
+	-- vim.o.guifont = "Monaspace Xenon:h14" -- set in config.toml
+	vim.g.neovide_text_gamma = 0.9
+	vim.g.neovide_text_contrast = 0.1
 
 	-- window settings --
 	vim.g.neovide_scale_factor = 1.0
-	vim.g.neovide_opacity = 0.8
 	vim.g.neovide_padding_top = 12
 	vim.g.neovide_refresh_rate = 120 -- only applies if --no-vsync is passed
 
@@ -126,4 +169,17 @@ if vim.g.neovide then
 	vim.keymap.set("n", "<C-->", function()
 		change_scale_factor(1 / sf)
 	end)
+
+	-- transparency controls (note: future self may want vim.g.neovide_normal_opacity) --
+	local opacity_interval = 0.1
+	vim.g.neovide_opacity = 1.0
+
+	vim.keymap.set("n", "t+", function()
+		vim.g.neovide_opacity = math.max(0.0, vim.g.neovide_opacity - opacity_interval)
+	end)
+
+	vim.keymap.set("n", "t-", function()
+		vim.g.neovide_opacity = math.min(1.0, vim.g.neovide_opacity + opacity_interval)
+	end)
+	--
 end
