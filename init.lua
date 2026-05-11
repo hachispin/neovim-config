@@ -25,15 +25,19 @@ require("lazy").setup({
 	checker = { enabled = true },
 })
 
+-- ui 2 and nightly neovim stuff
+require("vim._core.ui2").enable()
+--
+
 -- a poor man's bufferline gutter, follows everforest scheme
 vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#7A8478" })
 vim.api.nvim_set_hl(0, "LineNr", { fg = "#9DA9A0", bold = true })
 vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#7A8478" })
 --
 
-vim.opt.shiftwidth = 4 -- amount to shift (<</>>)
-vim.opt.tabstop = 4 -- visual size of tab (in spaces)
-vim.opt.showmode = false -- don't show mode (e.g, INSERT) because i use lualine
+vim.o.shiftwidth = 4 -- amount to shift (<</>>)
+vim.o.tabstop = 4 -- visual size of tab (in spaces)
+vim.o.showmode = false -- don't show mode (e.g, INSERT) because i use lualine
 vim.o.relativenumber = true -- lines numbers shown relative to the cursor
 
 -- show line number (with relative enabled, this shows the line number
@@ -49,6 +53,11 @@ vim.diagnostic.enable(true) -- enable diagnostics (though it should be on by def
 vim.diagnostic.config({ -- show warnings as extra ("virtual") lines
 	virtual_lines = true,
 })
+
+-- partial cmds with cmdheight=0
+vim.o.showcmd = true
+vim.o.showcmdloc = "statusline"
+--
 
 -- shut up lua
 vim.lsp.config("lua_ls", { settings = { Lua = { diagnostics = { globals = { "vim" } } } } })
@@ -134,8 +143,6 @@ vim.keymap.set("n", "<leader>b", function()
 end)
 --
 
-vim.api.nvim_set_hl(0, "Normal", { fg = vim.api.nvim_get_hl(0, { name = "Normal" }).fg, bg = "black" })
-
 -- neovide specific things (i've betrayed TUIs)
 if vim.g.neovide then
 	-- vim.o.guifont = "Monaspace Xenon:h14" -- set in config.toml
@@ -171,11 +178,12 @@ if vim.g.neovide then
 	end)
 
 	-- transparency controls (note: future self may want vim.g.neovide_normal_opacity) --
-	local opacity_interval = 0.1
+	local opacity_interval = 0.05
+	local minimum_opacity = 0.5
 	vim.g.neovide_opacity = 1.0
 
 	vim.keymap.set("n", "t+", function()
-		vim.g.neovide_opacity = math.max(0.0, vim.g.neovide_opacity - opacity_interval)
+		vim.g.neovide_opacity = math.max(minimum_opacity, vim.g.neovide_opacity - opacity_interval)
 	end)
 
 	vim.keymap.set("n", "t-", function()
