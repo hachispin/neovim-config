@@ -3,15 +3,26 @@ return {
 	opts = {
 		ensure_installed = {
 			"basedpyright",
-			"ruff",
-			"lua_ls",
 			"bashls",
 			"clangd",
 			"csharp_ls",
+			"lua_ls",
+			"ruff",
+			"stylua",
+			"tombi",
 		},
+		--[[  go install these lol 
+			"clang-format"
+			"csharpier" 
+			"isort" 
+			"prettierd" 
+			"roslyn" 
+			"shellcheck" 
+			"shfmt"
+		--]]
 		automatic_enable = {
 			exclude = {
-				-- rustaceanvim conflict
+				-- rustaceanvim conflict!
 				"rust_analyzer",
 			},
 		},

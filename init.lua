@@ -44,8 +44,11 @@ vim.o.relativenumber = true -- lines numbers shown relative to the cursor
 -- of the current line you're on, which would otherwise just be "0")
 vim.o.number = true
 
+-- case-insensitive search unless search includes uppercase characters
+vim.o.ignorecase = true
+vim.o.smartcase = true
+
 vim.o.undofile = true -- save undo history to file for persistence
-vim.o.smartcase = true -- case-insensitive search unless search includes uppercase characters
 vim.o.updatetime = 300 -- makes events more responsive (300ms)
 vim.o.scrolloff = 10 -- keep 10 lines above and below cursor
 vim.o.cmdheight = 0 -- hide cmdline when not being used
