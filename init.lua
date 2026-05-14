@@ -176,6 +176,10 @@ if vim.g.neovide then
 		change_scale_factor(sf)
 	end)
 
+	vim.keymap.set("n", "<C-0>", function()
+		vim.g.neovide_scale_factor = 1.0
+	end)
+
 	vim.keymap.set("n", "<C-->", function()
 		change_scale_factor(1 / sf)
 	end)
