@@ -21,18 +21,12 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	spec = { { import = "plugins" } },
-	install = { colorscheme = { "everforest" } },
+	install = { colorscheme = { "nordic" } },
 	checker = { enabled = true },
 })
 
 -- ui 2 and nightly neovim stuff
 require("vim._core.ui2").enable()
---
-
--- a poor man's bufferline gutter, follows everforest scheme
-vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#7A8478" })
-vim.api.nvim_set_hl(0, "LineNr", { fg = "#9DA9A0", bold = true })
-vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#7A8478" })
 --
 
 vim.o.shiftwidth = 4 -- amount to shift (<</>>)
