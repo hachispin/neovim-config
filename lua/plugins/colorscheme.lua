@@ -1,73 +1,34 @@
 local opts = {
-	-- This callback can be used to override the colors used in the base palette.
-	on_palette = function(palette) end,
-	-- This callback can be used to override the colors used in the extended palette.
-	after_palette = function(palette) end,
-	-- This callback can be used to override highlights before they are applied.
-	on_highlight = function(highlights, palette) end,
-	-- Enable bold keywords.
-	bold_keywords = true,
-	-- Enable italic comments.
-	italic_comments = false,
-	-- Enable editor background transparency.
-	transparent = {
-		-- Enable transparent background.
-		bg = false,
-		-- Enable transparent background for floating windows.
-		float = false,
+	bold = true, -- enable bold fonts
+	italics = true, -- enable italics
+	compile = false, -- enable compiling the colorscheme
+	undercurl = true, -- enable undercurls
+	commentStyle = { italic = true },
+	functionStyle = {},
+	keywordStyle = { italic = true },
+	statementStyle = {},
+	typeStyle = {},
+	transparent = false, -- do not set background color
+	dimInactive = false, -- dim inactive window `:h hl-NormalNC`
+	terminalColors = true, -- define vim.g.terminal_color_{0,17}
+	colors = { -- add/modify theme and palette colors
+		palette = {},
+		theme = { zen = {}, pearl = {}, ink = {}, all = {} },
 	},
-	-- Enable brighter float border.
-	bright_border = false,
-	-- Reduce the overall amount of blue in the theme (diverges from base Nord).
-	reduced_blue = true,
-	-- Swap the dark background with the normal one.
-	swap_backgrounds = false,
-	-- Cursorline options.
-	cursorline = {
-		-- Bold font in cursorline.
-		bold = false,
-		-- Bold cursorline number.
-		bold_number = true,
-		-- Available styles: 'dark', 'light'.
-		theme = "dark",
-		-- Blending the cursorline bg with the buffer bg.
-		blend = 0.85,
+	overrides = function(colors) -- add/modify highlights
+		return {}
+	end,
+	background = { -- map the value of 'background' option to a theme
+		dark = "zen", -- try "zen", "mist" or "pearl" !
+		light = "pearl", -- try "zen", "mist" or "ink" !
 	},
-	-- Visual selection options.
-	visual = {
-		-- Bold font in visual selection.
-		bold = false,
-		-- Bold visual selection number.
-		bold_number = true,
-		-- Available styles: 'dark', 'light'.
-		theme = "dark",
-		-- Blending the visual selection bg with the buffer bg.
-		blend = 0.85,
-	},
-	noice = {
-		-- Available styles: `classic`, `flat`.
-		style = "classic",
-	},
-	telescope = {
-		-- Available styles: `classic`, `flat`.
-		style = "flat",
-	},
-	leap = {
-		-- Dims the backdrop when using leap.
-		dim_backdrop = false,
-	},
-	ts_context = {
-		-- Enables dark background for treesitter-context window
-		dark_background = true,
-	},
+	foreground = "saturated", -- "default" or "saturated" (can also be a table like background)
+	minimal = false, -- reduced color palette for a more minimal look
 }
-return {
 
-	"AlexvZyl/nordic.nvim",
+return {
+	"webhooked/kanso.nvim",
 	lazy = false,
 	priority = 1000,
 	opts = opts,
-	config = function()
-		require("nordic").load()
-	end,
 }
