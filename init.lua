@@ -21,9 +21,11 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	spec = { { import = "plugins" } },
-	install = { colorscheme = { "nordic" } },
+	install = { colorscheme = { "kanso" } },
 	checker = { enabled = true },
 })
+
+vim.cmd("colorscheme kanso")
 
 -- ui 2 and nightly neovim stuff
 require("vim._core.ui2").enable()
@@ -41,9 +43,10 @@ vim.o.number = true
 -- case-insensitive search unless search includes uppercase characters
 vim.o.ignorecase = true
 vim.o.smartcase = true
+--
 
 vim.o.undofile = true -- save undo history to file for persistence
-vim.o.updatetime = 300 -- makes events more responsive (300ms)
+vim.o.updatetime = 200 -- makes events more responsive (200ms)
 vim.o.scrolloff = 10 -- keep 10 lines above and below cursor
 vim.o.cmdheight = 0 -- hide cmdline when not being used
 vim.diagnostic.enable(true) -- enable diagnostics (though it should be on by default)
@@ -137,6 +140,12 @@ vim.keymap.set("n", "<leader>b", function()
 			vim.api.nvim_set_hl(0, group, saved[group])
 		end
 	end
+end)
+--
+
+-- toggle inlay hints
+vim.keymap.set("n", "<leader>h", function()
+	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end)
 --
 
