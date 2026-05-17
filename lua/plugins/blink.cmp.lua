@@ -28,7 +28,7 @@ return {
 		keymap = { preset = "default" },
 		completion = {
 			documentation = { auto_show = false },
-			trigger = { show_on_insert = true, show_on_backspace = true },
+			--trigger = { show_on_insert = true, show_on_backspace = true },
 		},
 		sources = { default = { "lsp", "path", "snippets", "buffer" } },
 		fuzzy = { implementation = "rust" },

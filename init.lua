@@ -2,6 +2,12 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "."
 
+-- ui 2 and nightly neovim stuff
+require("vim._core.ui2").enable()
+--
+
+vim.o.cmdheight = 0 -- hide cmdline when not being used
+
 -- lazy setup
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -21,15 +27,11 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	spec = { { import = "plugins" } },
-	install = { colorscheme = { "kanso" } },
+	install = { colorscheme = { "kanagawa" } },
 	checker = { enabled = true },
 })
 
-vim.cmd("colorscheme kanso")
-
--- ui 2 and nightly neovim stuff
-require("vim._core.ui2").enable()
---
+vim.cmd("colorscheme kanagawa")
 
 vim.o.shiftwidth = 4 -- amount to shift (<</>>)
 vim.o.tabstop = 4 -- visual size of tab (in spaces)
@@ -48,7 +50,6 @@ vim.o.smartcase = true
 vim.o.undofile = true -- save undo history to file for persistence
 vim.o.updatetime = 200 -- makes events more responsive (200ms)
 vim.o.scrolloff = 10 -- keep 10 lines above and below cursor
-vim.o.cmdheight = 0 -- hide cmdline when not being used
 vim.diagnostic.enable(true) -- enable diagnostics (though it should be on by default)
 vim.diagnostic.config({ -- show warnings as extra ("virtual") lines
 	virtual_lines = true,
@@ -110,12 +111,23 @@ end, { desc = "Rename current item under cursor with LSP" })
 --
 
 -- black background toggle, mostly for better looks when setting transparency --
--- courtesy of chatgpt so like 50% chance of being slop
 local groups = {
 	"Normal",
 	"NormalNC",
 	"SignColumn",
-	"EndOfBuffer",
+	"LineNr",
+	--	"CursorLineNr",
+	--	"LineNrAbove",
+	--	"LineNrBelow",
+	"FoldColumn",
+	"CursorLineFold",
+	"CursorLineSign",
+	"GitSignsAdd",
+	"GitSignsChange",
+	"GitSignsDelete",
+	"GitSignsTopdelete",
+	"GitSignsChangedelete",
+	"GitSignsUntracked",
 }
 
 local saved = {}
@@ -146,6 +158,12 @@ end)
 -- toggle inlay hints
 vim.keymap.set("n", "<leader>h", function()
 	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end)
+--
+
+-- blink sometimes dies for some reason ?
+vim.keymap.set("n", "<leader>R", function()
+	require("blink.cmp").reload()
 end)
 --
 
