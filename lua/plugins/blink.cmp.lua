@@ -5,13 +5,8 @@ return {
 		"rafamadriz/friendly-snippets",
 	},
 	build = function()
-		-- build the fuzzy matcher, wait up to 60 seconds
-		-- you can use `gb` in `:Lazy` to rebuild the plugin as needed
 		require("blink.cmp").build():wait(60000)
 	end,
-
-	---@module 'blink.cmp'
-	---@type blink.cmp.Config
 	opts = {
 		-- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
 		-- 'super-tab' for mappings similar to vscode (tab to accept)
@@ -28,9 +23,24 @@ return {
 		keymap = { preset = "default" },
 		completion = {
 			documentation = { auto_show = false },
-			--trigger = { show_on_insert = true, show_on_backspace = true },
+			trigger = { show_on_blocked_trigger_characters = {} },
 		},
-		sources = { default = { "lsp", "path", "snippets", "buffer" } },
+
+		sources = {
+			default = { "lsp", "path", "snippets", "buffer" },
+			providers = {
+				lsp = {
+					override = {
+						get_trigger_characters = function(self)
+							local trigger_characters = self:get_trigger_characters()
+							vim.list_extend(trigger_characters, { "\n", "\t", " " })
+							return trigger_characters
+						end,
+					},
+				},
+			},
+		},
+
 		fuzzy = { implementation = "rust" },
 		signature = { enabled = true },
 	},
