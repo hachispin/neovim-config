@@ -4,6 +4,7 @@ vim.g.maplocalleader = "."
 
 -- ui 2 and nightly neovim stuff
 require("vim._core.ui2").enable()
+vim.o.winborder = "rounded"
 --
 
 vim.o.cmdheight = 0 -- hide cmdline when not being used
@@ -60,8 +61,20 @@ vim.o.showcmd = true
 vim.o.showcmdloc = "statusline"
 --
 
--- shut up lua
+-- lsp and whatever
 vim.lsp.config("lua_ls", { settings = { Lua = { diagnostics = { globals = { "vim" } } } } })
+vim.lsp.config("rust_analyzer", {
+	settings = {
+		["rust_analyzer"] = {
+			assist = { emitMustUse = true, preferSelf = true },
+			completion = { privateEditable = { enable = true } },
+			diagnostics = {
+				experimental = { enable = true },
+				styleLints = { enable = true },
+			},
+		},
+	},
+})
 --
 
 -- easier split nav, <C-[hjkl]>
