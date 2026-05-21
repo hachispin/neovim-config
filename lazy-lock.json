@@ -11,10 +11,10 @@
   "mason-lspconfig.nvim": { "branch": "main", "commit": "7b01e2974a47d489bb92f47a41e4c0088ea8f86e" },
   "mason.nvim": { "branch": "main", "commit": "cbf8d285e1462dd24acf3507817be2bbcb035919" },
   "nvim-autopairs": { "branch": "master", "commit": "7b9923abad60b903ece7c52940e1321d39eccc79" },
-  "nvim-lspconfig": { "branch": "master", "commit": "deb0df61b2d6691e745b16a42755e10ad38218e9" },
+  "nvim-lspconfig": { "branch": "master", "commit": "dfbada1a311c4bf3369f8d5421369c9b6e8b888f" },
   "nvim-treesitter": { "branch": "main", "commit": "4916d6592ede8c07973490d9322f187e07dfefac" },
   "nvim-web-devicons": { "branch": "master", "commit": "7d8dad2c837fcdf2e65997e68657c1a21c568074" },
-  "roslyn.nvim": { "branch": "main", "commit": "6db5f6619f7e3063dc087ce6fad6ee0d307ff8ea" },
+  "roslyn.nvim": { "branch": "main", "commit": "159c8bf3feb793cafabd829ccf859cce6e7b473d" },
   "rustaceanvim": { "branch": "main", "commit": "f69c85a955b9a83d495e3dc8d43adb6364a0b765" },
   "vim-fugitive": { "branch": "master", "commit": "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0" }
 }
