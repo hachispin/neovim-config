@@ -223,8 +223,12 @@ if vim.g.neovide then
 	local minimum_opacity = 0.5
 	vim.g.neovide_opacity = 1.0
 
-	vim.keymap.set("n", "t+", function()
+	vim.keymap.set("n", "t=", function()
 		vim.g.neovide_opacity = math.max(minimum_opacity, vim.g.neovide_opacity - opacity_interval)
+	end)
+
+	vim.keymap.set("n", "t0", function()
+		vim.g.neovide_opacity = 1.0
 	end)
 
 	vim.keymap.set("n", "t-", function()
