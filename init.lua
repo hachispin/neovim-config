@@ -32,8 +32,6 @@ require("lazy").setup({
 	checker = { enabled = true },
 })
 
-vim.cmd("colorscheme kanagawa")
-
 vim.o.shiftwidth = 4 -- amount to shift (<</>>)
 vim.o.tabstop = 4 -- visual size of tab (in spaces)
 vim.o.showmode = false -- don't show mode (e.g, INSERT) because i use lualine
