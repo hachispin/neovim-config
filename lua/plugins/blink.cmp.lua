@@ -40,7 +40,6 @@ return {
 				},
 			},
 		},
-
 		fuzzy = { implementation = "rust" },
 		signature = { enabled = true, trigger = { show_on_keyword = true } },
 	},

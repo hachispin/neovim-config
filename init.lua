@@ -36,6 +36,7 @@ vim.o.shiftwidth = 4 -- amount to shift (<</>>)
 vim.o.tabstop = 4 -- visual size of tab (in spaces)
 vim.o.showmode = false -- don't show mode (e.g, INSERT) because i use lualine
 vim.o.relativenumber = true -- lines numbers shown relative to the cursor
+vim.o.cursorline = true -- highlight current line
 
 -- show line number (with relative enabled, this shows the line number
 -- of the current line you're on, which would otherwise just be "0")
