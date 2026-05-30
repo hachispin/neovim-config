@@ -28,7 +28,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	spec = { { import = "plugins" } },
-	install = { colorscheme = { "kanagawa" } },
+	install = { colorscheme = { "everforest" } },
 	checker = { enabled = true },
 })
 
@@ -98,6 +98,9 @@ vim.keymap.set("n", "<leader>v", function()
 	vim.diagnostic.open_float()
 end)
 --
+
+-- i'm lazy
+vim.keymap.set("n", ";", ":")
 
 -- yank/put with/from system clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "Yank to system clipboard" })
