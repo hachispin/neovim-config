@@ -32,10 +32,6 @@
       "rev": "1afbbb449aa0254823dbe1932e3cbb51886ff9fe",
       "src": "https://github.com/webhooked/kanso.nvim"
     },
-    "lexima.vim": {
-      "rev": "ab621e4756465c9d354fce88cff2bd1aa7887065",
-      "src": "https://github.com/cohama/lexima.vim"
-    },
     "lualine.nvim": {
       "rev": "221ce6b2d999187044529f49da6554a92f740a96",
       "src": "https://github.com/nvim-lualine/lualine.nvim"
