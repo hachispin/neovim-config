@@ -22,6 +22,11 @@ vim.o.splitright = true -- change splitting behaviour
 vim.o.splitbelow = true -- ^
 vim.o.confirm = true -- ask to save when doing :q on unsaved buffer
 
+-- partial cmds
+vim.o.cmdheight = 0
+vim.o.showcmd = true
+vim.o.showcmdloc = "statusline"
+
 vim.diagnostic.config({
 	update_in_insert = false,
 	severity_sort = true,
@@ -42,17 +47,18 @@ vim.diagnostic.config({
 	},
 })
 
--- partial cmds
-vim.o.cmdheight = 0
-vim.o.showcmd = true
-vim.o.showcmdloc = "statusline"
-
 -- i'm lazy
 vim.keymap.set("n", ";", ":")
+vim.keymap.set("n", ":", ":!")
+
+-- be annoying
+vim.keymap.set("n", "<left>", "<cmd>echo 'Use h to move!!'<CR>")
+vim.keymap.set("n", "<right>", "<cmd>echo 'Use j to move!!'<CR>")
+vim.keymap.set("n", "<up>", "<cmd>echo 'Use k to move!!'<CR>")
+vim.keymap.set("n", "<down>", "<cmd>echo 'Use l to move!!'<CR>")
 
 -- clear highlights from /
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
-
 
 -- lsp rename (note: must run :wa after)
 vim.keymap.set("n", "<leader>r", function()
@@ -89,18 +95,60 @@ vim.keymap.set("n", "<leader>.", function()
 	vim.cmd.bn()
 end, { desc = "Move to next buffer" })
 
--- yank/put with/from system clipboard
+-- Yank/put with/from system clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "[y]ank to system clipboard" })
 vim.keymap.set("n", "<leader>yy", '"+yy', { desc = "[yy]ank current line to system clipboard" })
 vim.keymap.set("n", "<leader>Y", '"+Y', { desc = "[Y]ank until end of line to system clipboard" })
 vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', { desc = "[p]ut from system clipboard (after)" })
 vim.keymap.set({ "n", "v" }, "<leader>P", '"+P', { desc = "[P]ut from system clipboard (before)" })
 
+-- Autocomplete setup (must be done after lsp setup) (will do more later probably)
+vim.o.complete = ".,o"
+vim.o.completeopt = "fuzzy,menuone,noselect,popup"
+vim.o.autocomplete = true
+vim.o.pumheight = 7
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(ev)
+		vim.lsp.completion.enable(true, ev.data.client_id, ev.buf, {
+			-- Optional formating of items
+			convert = function(item)
+				-- Remove leading misc chars for abbr name,
+				-- and cap field to 25 chars
+				--local abbr = item.label
+				--abbr = abbr:match("[%w_.]+.*") or abbr
+				--abbr = #abbr > 25 and abbr:sub(1, 24) .. "…" or abbr
+				--
+				-- Remove return value
+				--local menu = ""
+
+				-- Only show abbr name, remove leading misc chars (bullets etc.),
+				-- and cap field to 15 chars
+				local abbr = item.label
+				abbr = abbr:gsub("%b()", ""):gsub("%b{}", "")
+				abbr = abbr:match("[%w_.]+.*") or abbr
+				abbr = #abbr > 15 and abbr:sub(1, 14) .. "…" or abbr
+
+				-- Cap return value field to 15 chars
+				local menu = item.detail or ""
+				menu = #menu > 15 and menu:sub(1, 14) .. "…" or menu
+
+				return { abbr = abbr, menu = menu }
+			end,
+		})
+	end,
+})
+
 -- require
-require('plugins.cord')
-require('plugins.lualine')
-require('lsp-setup')
-require('rustaceanvim')
+require("plugins.cord")
+require("plugins.lualine")
+require("lsp-setup")
+require("plugins.rustaceanvim")
+require("plugins.conform")
+require("colorschemes")
+
+-- colorscheme
+vim.cmd("colorscheme everforest")
 
 -- neovide specific things
 if vim.g.neovide then
