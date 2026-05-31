@@ -1,10 +1,9 @@
 vim.pack.add({
-	'https://github.com/nvim-tree/nvim-web-devicons',
-    'https://github.com/nvim-lualine/lualine.nvim'
+	"https://github.com/nvim-tree/nvim-web-devicons",
+	"https://github.com/nvim-lualine/lualine.nvim",
 })
 
-require('lualine').setup(
-{
+require("lualine").setup({
 	options = {
 		icons_enabled = true,
 		theme = "auto",
@@ -45,7 +44,23 @@ require('lualine').setup(
 			{ "%S", separator = "" },
 			"encoding",
 			"fileformat",
-			{ "filetype", separator = "", padding = { left = 1, right = 0 } },
+			-- To ensure correct padding even if no lsp_status
+			{
+				"filetype",
+				separator = "",
+				padding = { left = 1, right = 0 },
+				cond = function()
+					return next(vim.lsp.get_clients({ bufnr = 0 })) ~= nil
+				end,
+			},
+			{
+				"filetype",
+				separator = "",
+				padding = { left = 1, right = 1 },
+				cond = function()
+					return next(vim.lsp.get_clients({ bufnr = 0 })) == nil
+				end,
+			},
 			{
 				"lsp_status",
 				show_name = false,
@@ -69,5 +84,4 @@ require('lualine').setup(
 	winbar = {},
 	inactive_winbar = {},
 	extensions = {},
-}
-)
+})
