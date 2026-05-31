@@ -12,24 +12,25 @@ require("mason").setup({
 })
 
 -- Stuff to install
--- (Don't add rust-analyzer, it's handled by rustaceanvim)
 require("mason-tool-installer").setup({
 	ensure_installed = {
 		"basedpyright",
 		"bash-language-server",
+		"clang-format",
 		"clangd",
 		"csharp-language-server",
-		"lua-language-server",
-		"ruff",
-		"stylua",
-		"tombi",
-		"clang-format",
 		"csharpier",
 		"isort",
+		"lua-language-server",
 		"prettierd",
+		"pyright",
 		"roslyn",
+		"ruff",
+		-- "rust-analyzer", (handled by rustaceanvim)
 		"shellcheck",
 		"shfmt",
+		"stylua",
+		"tombi",
 	},
 	auto_update = true,
 })
@@ -40,4 +41,13 @@ vim.lsp.config("lua_ls", {
 })
 
 -- Enable LSPs
-vim.lsp.enable({ "lua_ls", "clangd" })
+vim.lsp.enable({
+	"lua_ls",
+	"clangd",
+	"csharp_ls",
+	"basedpyright",
+	"bash_ls",
+	"ruff",
+	"tombi",
+	"roslyn",
+})
