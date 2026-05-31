@@ -1,7 +1,6 @@
-vim.pack.add{'https://github.com/vyfor/cord.nvim'}
+vim.pack.add({ "https://github.com/vyfor/cord.nvim" })
 
-require('cord').setup(
-{
+require("cord").setup({
 	enabled = true,
 	log_level = vim.log.levels.OFF,
 	editor = {
@@ -141,5 +140,4 @@ require('cord').setup(
 		},
 	},
 }
-
 )

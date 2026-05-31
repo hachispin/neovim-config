@@ -37,7 +37,15 @@ require("mason-tool-installer").setup({
 
 -- LSP configs
 vim.lsp.config("lua_ls", {
-	settings = { Lua = { diagnostics = { globals = { "vim" } }, format = { enable = false } } },
+	settings = {
+		Lua = {
+			diagnostics = { globals = { "vim" } },
+			format = { enable = false },
+			runtime = { version = "LuaJIT" },
+			workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+			telemetry = { enable = false },
+		},
+	},
 })
 
 -- Enable LSPs
