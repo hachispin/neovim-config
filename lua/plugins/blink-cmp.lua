@@ -15,8 +15,21 @@ cmp.setup({
 	--
 	-- See :h blink-cmp-config-keymap for defining your own keymap
 	keymap = { preset = "default" },
-	completion = { documentation = { auto_show = false } },
-	sources = { default = { "lsp", "path", "snippets", "buffer" } },
+	completion = { documentation = { auto_show = false }, trigger = { show_on_blocked_trigger_characters = {} } },
+	sources = {
+		default = { "lsp", "path", "snippets", "buffer" },
+		providers = {
+			lsp = {
+				override = {
+					get_trigger_characters = function(self)
+						local trigger_characters = self:get_trigger_characters()
+						vim.list_extend(trigger_characters, { "\n", "\t", " " })
+						return trigger_characters
+					end,
+				},
+			},
+		},
+	},
 	fuzzy = { implementation = "rust" },
 	signature = { enabled = true },
 })

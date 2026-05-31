@@ -1,7 +1,7 @@
 vim.pack.add({
-	"https://github.com/neovim/nvim-lspconfig",
 	"https://github.com/mason-org/mason.nvim",
 	"https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim",
+	"https://github.com/neovim/nvim-lspconfig",
 })
 
 require("mason").setup({
@@ -54,7 +54,7 @@ vim.lsp.enable({
 	"clangd",
 	"csharp_ls",
 	"basedpyright",
-	"bash_ls",
+	"bashls",
 	"ruff",
 	"tombi",
 	"roslyn",
