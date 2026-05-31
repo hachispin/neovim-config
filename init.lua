@@ -127,6 +127,8 @@ require("plugins.nvim-autopairs")
 require("plugins.nvim-treesitter")
 require("plugins.nvim-treesitter-endwise")
 require("plugins.blink-cmp")
+require("plugins.vim-fugitive")
+require("plugins.gitsigns-nvim")
 
 -- Current colorscheme
 vim.cmd("colorscheme everforest")
