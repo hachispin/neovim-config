@@ -147,8 +147,8 @@ require("plugins.rustaceanvim")
 require("plugins.conform")
 require("modules.colorschemes")
 
--- colorscheme
-vim.cmd("colorscheme everforest")
+-- current colorscheme
+vim.cmd("colorscheme poimandres")
 
 -- neovide specific things
 if vim.g.neovide then
