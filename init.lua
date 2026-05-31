@@ -142,10 +142,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- require
 require("plugins.cord")
 require("plugins.lualine")
-require("lsp-setup")
+require("modules.lsp-setup")
 require("plugins.rustaceanvim")
 require("plugins.conform")
-require("colorschemes")
+require("modules.colorschemes")
 
 -- colorscheme
 vim.cmd("colorscheme everforest")
