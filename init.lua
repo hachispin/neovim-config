@@ -130,6 +130,7 @@ require("plugins.blink-cmp")
 require("plugins.vim-fugitive")
 require("plugins.gitsigns-nvim")
 require("plugins.transparent-nvim")
+require("plugins.mini-surround")
 
 -- Current colorscheme
 vim.cmd("colorscheme everforest")
