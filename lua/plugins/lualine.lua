@@ -1,7 +1,13 @@
-local opts = {
+vim.pack.add({
+	'https://github.com/nvim-tree/nvim-web-devicons',
+    'https://github.com/nvim-lualine/lualine.nvim'
+})
+
+require('lualine').setup(
+{
 	options = {
 		icons_enabled = true,
-		theme = "everforest",
+		theme = "auto",
 		component_separators = { left = "", right = "" },
 		section_separators = { left = "", right = "" },
 		disabled_filetypes = {
@@ -64,9 +70,4 @@ local opts = {
 	inactive_winbar = {},
 	extensions = {},
 }
-
-return {
-	"nvim-lualine/lualine.nvim",
-	dependencies = { "nvim-tree/nvim-web-devicons" },
-	opts = opts,
-}
+)

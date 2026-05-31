@@ -1,4 +1,7 @@
-local opts = {
+vim.pack.add{'https://github.com/vyfor/cord.nvim'}
+
+require('cord').setup(
+{
 	enabled = true,
 	log_level = vim.log.levels.OFF,
 	editor = {
@@ -139,7 +142,4 @@ local opts = {
 	},
 }
 
-return {
-	"vyfor/cord.nvim",
-	opts = opts,
-}
+)
