@@ -2,88 +2,87 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "."
 
--- ui 2 and nightly neovim stuff
+-- new ui with pager stuff
 require("vim._core.ui2").enable()
-vim.o.winborder = "rounded"
---
 
-vim.o.cmdheight = 0 -- hide cmdline when not being used
-
--- lazy setup
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-	if vim.v.shell_error ~= 0 then
-		vim.api.nvim_echo({
-			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-			{ out, "WarningMsg" },
-			{ "\nPress any key to exit..." },
-		}, true, {})
-		vim.fn.getchar()
-		os.exit(1)
-	end
-end
-vim.opt.rtp:prepend(lazypath)
-
-require("lazy").setup({
-	spec = { { import = "plugins" } },
-	install = { colorscheme = { "everforest" } },
-	checker = { enabled = true },
-})
-
+vim.o.winborder = "rounded" -- rounded borders
 vim.o.shiftwidth = 4 -- amount to shift (<</>>)
 vim.o.tabstop = 4 -- visual size of tab (in spaces)
 vim.o.showmode = false -- don't show mode (e.g, INSERT) because i use lualine
 vim.o.relativenumber = true -- lines numbers shown relative to the cursor
 vim.o.cursorline = true -- highlight current line
-
--- show line number (with relative enabled, this shows the line number
--- of the current line you're on, which would otherwise just be "0")
-vim.o.number = true
-
--- case-insensitive search unless search includes uppercase characters
-vim.o.ignorecase = true
-vim.o.smartcase = true
---
-
+vim.o.number = true -- show line number
+vim.o.inccommand = "split" -- view substitutions live
 vim.o.undofile = true -- save undo history to file for persistence
 vim.o.updatetime = 200 -- makes events more responsive (200ms)
 vim.o.scrolloff = 10 -- keep 10 lines above and below cursor
-vim.diagnostic.enable(true) -- enable diagnostics (though it should be on by default)
-vim.diagnostic.config({ -- show warnings as extra ("virtual") lines
-	virtual_lines = true,
-})
+vim.o.ignorecase = true -- case-insensitive search by default
+vim.o.smartcase = true -- case-sensitive if \C or search contains captial letters
+vim.o.splitright = true -- change splitting behaviour
+vim.o.splitbelow = true -- ^
+vim.o.confirm = true -- ask to save when doing :q on unsaved buffer
 
--- partial cmds with cmdheight=0
-vim.o.showcmd = true
-vim.o.showcmdloc = "statusline"
---
+vim.diagnostic.config({
+	update_in_insert = false,
+	severity_sort = true,
+	float = { border = "rounded", source = "if_many" },
 
--- lsp and whatever
-vim.lsp.config("lua_ls", { settings = { Lua = { diagnostics = { globals = { "vim" } } } } })
-vim.lsp.config("rust_analyzer", {
-	settings = {
-		["rust_analyzer"] = {
-			assist = { emitMustUse = true, preferSelf = true },
-			completion = { privateEditable = { enable = true } },
-			diagnostics = {
-				experimental = { enable = true },
-				styleLints = { enable = true },
-			},
-		},
+	virtual_text = { current_line = true },
+	virtual_lines = false,
+
+	-- Auto open the float when jumping with `[d` and `]d`
+	jump = {
+		on_jump = function(_, bufnr)
+			vim.diagnostic.open_float({
+				bufnr = bufnr,
+				scope = "cursor",
+				focus = false,
+			})
+		end,
 	},
 })
---
 
--- easier split nav, <C-[hjkl]>
+-- partial cmds
+vim.o.cmdheight = 0
+vim.o.showcmd = true
+vim.o.showcmdloc = "statusline"
+
+-- i'm lazy
+vim.keymap.set("n", ";", ":")
+
+-- clear highlights from /
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+
+-- lsp config
+vim.lsp.config("lua_ls", { settings = { Lua = { diagnostics = { globals = { "vim" } } } } })
+
+-- lsp rename (note: must run :wa after)
+vim.keymap.set("n", "<leader>r", function()
+	vim.lsp.buf.rename()
+end, { desc = "LSP rename" })
+
+-- view diagnostic
+vim.keymap.set("n", "<leader>v", function()
+	vim.diagnostic.open_float()
+end)
+
+-- toggle inlay hints
+vim.keymap.set("n", "<leader>h", function()
+	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end)
+
+-- fix
+vim.keymap.set("n", "<leader>f", function()
+	vim.lsp.buf.code_action()
+end)
+
+-- easier split nav
 vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
 vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
---
 
--- switching buffers with <-,.->
+-- switching buffers with , and .
 vim.keymap.set("n", "<leader>,", function()
 	vim.cmd.bp()
 end, { desc = "Move to previous buffer" })
@@ -91,109 +90,25 @@ end, { desc = "Move to previous buffer" })
 vim.keymap.set("n", "<leader>.", function()
 	vim.cmd.bn()
 end, { desc = "Move to next buffer" })
---
-
--- view diagnostic
-vim.keymap.set("n", "<leader>v", function()
-	vim.diagnostic.open_float()
-end)
---
-
--- i'm lazy
-vim.keymap.set("n", ";", ":")
 
 -- yank/put with/from system clipboard
-vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "Yank to system clipboard" })
-vim.keymap.set("n", "<leader>yy", '"+yy', { desc = "Yank line to system clipboard" })
-vim.keymap.set("n", "<leader>Y", '"+Y', { desc = "Yank to end of line to system clipboard" })
-vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', { desc = "Put from system clipboard (after)" })
-vim.keymap.set({ "n", "v" }, "<leader>P", '"+P', { desc = "Put from system clipboard (before)" })
---
+vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "[y]ank to system clipboard" })
+vim.keymap.set("n", "<leader>yy", '"+yy', { desc = "[yy]ank current line to system clipboard" })
+vim.keymap.set("n", "<leader>Y", '"+Y', { desc = "[Y]ank until end of line to system clipboard" })
+vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', { desc = "[p]ut from system clipboard (after)" })
+vim.keymap.set({ "n", "v" }, "<leader>P", '"+P', { desc = "[P]ut from system clipboard (before)" })
 
--- lsp rename (note: must run :wa after)
-vim.keymap.set("n", "<leader>r", function()
-	-- clear rename field (hacky)
-	vim.api.nvim_create_autocmd({ "CmdlineEnter" }, {
-		callback = function()
-			local key = vim.api.nvim_replace_termcodes("<C-u>", true, false, true)
-			vim.api.nvim_feedkeys(key, "c", false)
-			return true
-		end,
-	})
+-- plguins
+require('plugins.cord')
 
-	vim.lsp.buf.rename()
-end, { desc = "Rename current item under cursor with LSP" })
---
-
--- black background toggle, mostly for better looks when setting transparency --
-local groups = {
-	"Normal",
-	"NormalNC",
-	"SignColumn",
-	"LineNr",
-	--	"CursorLineNr",
-	--	"LineNrAbove",
-	--	"LineNrBelow",
-	"FoldColumn",
-	"CursorLineFold",
-	"CursorLineSign",
-	"GitSignsAdd",
-	"GitSignsChange",
-	"GitSignsDelete",
-	"GitSignsTopdelete",
-	"GitSignsChangedelete",
-	"GitSignsUntracked",
-}
-
-local saved = {}
-local enabled = false
-
-for _, group in ipairs(groups) do
-	saved[group] = vim.api.nvim_get_hl(0, { name = group })
-end
-
-vim.keymap.set("n", "<leader>b", function()
-	enabled = not enabled
-
-	for _, group in ipairs(groups) do
-		if enabled then
-			local hl = saved[group]
-
-			vim.api.nvim_set_hl(0, group, {
-				fg = hl.fg,
-				bg = "#000000",
-			})
-		else
-			vim.api.nvim_set_hl(0, group, saved[group])
-		end
-	end
-end)
---
-
--- toggle inlay hints
-vim.keymap.set("n", "<leader>h", function()
-	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-end)
---
-
--- blink sometimes dies for some reason ?
-vim.keymap.set("n", "<leader>R", function()
-	require("blink.cmp").reload()
-end)
---
-
--- neovide specific things (i've betrayed TUIs)
+-- neovide specific things
 if vim.g.neovide then
-	-- vim.o.guifont = "Monaspace Xenon:h14" -- set in config.toml
-	vim.g.neovide_text_gamma = 0.9
-	vim.g.neovide_text_contrast = 0.1
-
-	-- window settings --
+	-- window settings
 	vim.g.neovide_scale_factor = 1.0
 	vim.g.neovide_padding_top = 12
 	vim.g.neovide_refresh_rate = 120 -- only applies if --no-vsync is passed
 
-	-- cursor settings --
+	-- cursor settings
 	vim.g.neovide_cursor_cell_color_fallback = true
 	--[[
 	vim.g.neovide_cursor_animation_length = 0.1
@@ -201,7 +116,7 @@ if vim.g.neovide then
 	vim.g.neovide_scroll_animation_length = 0.3
 	--]]
 
-	-- zooming implementation --
+	-- zooming implementation
 	local sf = 1.125
 
 	local change_scale_factor = function(delta)
@@ -220,7 +135,7 @@ if vim.g.neovide then
 		change_scale_factor(1 / sf)
 	end)
 
-	-- transparency controls (note: future self may want vim.g.neovide_normal_opacity) --
+	-- transparency controls (note: future self may want vim.g.neovide_normal_opacity)
 	local opacity_interval = 0.05
 	local minimum_opacity = 0.5
 	vim.g.neovide_opacity = 1.0
@@ -236,5 +151,4 @@ if vim.g.neovide then
 	vim.keymap.set("n", "t-", function()
 		vim.g.neovide_opacity = math.min(1.0, vim.g.neovide_opacity + opacity_interval)
 	end)
-	--
 end
