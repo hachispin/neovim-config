@@ -24,7 +24,6 @@ require("mason-tool-installer").setup({
 		"isort",
 		"lua-language-server",
 		"prettierd",
-		"pyright",
 		"roslyn",
 		"ruff",
 		-- "rust-analyzer", (handled by rustaceanvim)
