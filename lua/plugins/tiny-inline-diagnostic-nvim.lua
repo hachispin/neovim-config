@@ -23,40 +23,6 @@ require("tiny-inline-diagnostic").setup({
 		-- Set to 0 for immediate updates (may cause lag on slow systems)
 		throttle = 0,
 
-		-- Minimum number of characters before wrapping long messages
-		softwrap = 30,
-
-		-- Control how diagnostic messages are displayed
-		-- NOTE: When using display_count = true, you need to enable multiline diagnostics with multilines.enabled = true
-		--       If you want them to always be displayed, you can also set multilines.always_show = true.
-		add_messages = {
-			messages = true, -- Show full diagnostic messages
-			display_count = false, -- Show diagnostic count instead of messages when cursor not on line
-			use_max_severity = false, -- When counting, only show the most severe diagnostic
-			show_multiple_glyphs = true, -- Show multiple icons for multiple diagnostics of same severity
-		},
-
-		-- Settings for multiline diagnostics
-		multilines = {
-			enabled = false, -- Enable support for multiline diagnostic messages
-			always_show = false, -- Always show messages on all lines of multiline diagnostics
-			trim_whitespaces = false, -- Remove leading/trailing whitespace from each line
-			tabstop = 4, -- Number of spaces per tab when expanding tabs
-			severity = nil, -- Filter multiline diagnostics by severity (e.g., { vim.diagnostic.severity.ERROR })
-		},
-
-		-- Handle messages that exceed the window width
-		overflow = {
-			mode = "wrap", -- "wrap": split into lines, "none": no truncation, "oneline": keep single line
-			padding = 0, -- Extra characters to trigger wrapping earlier
-		},
-
-		-- Break long messages into separate lines
-		break_line = {
-			enabled = false, -- Enable automatic line breaking
-			after = 30, -- Number of characters before inserting a line break
-		},
-
 		-- Automatically disable diagnostics when opening diagnostic float windows
 		override_open_float = true,
 	},
