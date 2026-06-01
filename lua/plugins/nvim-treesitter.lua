@@ -2,7 +2,23 @@ vim.pack.add({ { src = "https://github.com/nvim-treesitter/nvim-treesitter" } })
 
 local ts = require("nvim-treesitter")
 ts.setup({})
-ts.install({ "rust", "bash", "c", "cpp", "c_sharp", "python" })
+ts.install({
+	"rust",
+	"bash",
+	"c",
+	"cpp",
+	"c_sharp",
+	"python",
+	"markdown",
+	"markdown_inline",
+	"query",
+	"vim",
+	"vimdoc",
+	"lua",
+	"luadoc",
+	"diff",
+	"html",
+})
 
 vim.api.nvim_create_autocmd("PackChanged", {
 	callback = function()
