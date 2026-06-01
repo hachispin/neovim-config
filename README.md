@@ -14,7 +14,7 @@ Loosely based off of [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim
 - blink.cmp: completions
 - conform: formatting
 - cord: discord status
-- dial.nvim: extended <C-a>/<C-x>
+- dial.nvim: extended \<C-a\>/\<C-x\>
 - gitsigns.nvim: hunks
 - lualine: pretty statusline
 - mini.surround: for surround commands
