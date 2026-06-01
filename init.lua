@@ -100,7 +100,7 @@ vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', { desc = "[p]ut from system cli
 vim.keymap.set({ "n", "v" }, "<leader>P", '"+P', { desc = "[P]ut from system clipboard (before)" })
 
 vim.api.nvim_create_user_command("Cfg", function()
-	vim.cmd.cd("~/.config/nvim")
+	vim.cmd.cd(vim.fn.stdpath("config"))
 	vim.cmd.e("init.lua")
 
 	-- Restore old position
@@ -111,21 +111,16 @@ vim.api.nvim_create_user_command("Cfg", function()
 	end
 end, {})
 
--- Require
-require("modules.colorschemes")
-require("modules.lsp-setup")
-require("plugins.blink-cmp")
-require("plugins.conform")
-require("plugins.cord")
-require("plugins.gitsigns-nvim")
-require("plugins.lualine")
-require("plugins.mini-surround")
-require("plugins.nvim-autopairs")
-require("plugins.nvim-treesitter")
-require("plugins.nvim-treesitter-endwise")
-require("plugins.rustaceanvim")
-require("plugins.tiny-inline-diagnostic-nvim")
-require("plugins.vim-fugitive")
+-- Auto require plugins and modules
+for _, dir in ipairs({ "modules", "plugins" }) do
+	local path = vim.fn.stdpath("config") .. "/lua/" .. dir .. "/"
+
+	for _, file in ipairs(vim.fn.glob(path .. "*.lua", false, true)) do
+		local basename = vim.fs.basename(file)
+		local filename = basename:sub(1, basename:len() - 4)
+		require(dir .. "." .. filename)
+	end
+end
 
 -- Current colorscheme
 vim.cmd.colorscheme("everforest")
