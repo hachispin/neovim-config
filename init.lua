@@ -28,26 +28,9 @@ vim.o.showcmd = true
 vim.o.showcmdloc = "statusline"
 
 vim.diagnostic.config({
-	update_in_insert = false,
-	severity_sort = true,
-	float = { border = "rounded", source = "if_many" },
-
+	-- Handled by tiny-inline-diagnostic
 	virtual_lines = false,
-	virtual_text = {
-		current_line = true,
-		-- Truncate and only show first line
-		format = function(diagnostic)
-			local msg = diagnostic.message
-			local max_width = math.floor(vim.o.columns * 0.6)
-			msg = msg:match("^[^\n]+") or msg
-
-			if #msg > max_width then
-				msg = msg:sub(1, max_width - 1) .. "…"
-			end
-
-			return msg
-		end,
-	},
+	virtual_text = false,
 
 	-- Auto open the float when jumping with `[d` and `]d`
 	jump = {
@@ -62,8 +45,8 @@ vim.diagnostic.config({
 })
 
 -- I'm lazy
-vim.keymap.set("n", ";", ":")
-vim.keymap.set("n", ":", ":!")
+vim.keymap.set({ "n", "v" }, ";", ":")
+vim.keymap.set({ "n", "v" }, ":", ":!")
 
 -- Be annoying
 vim.keymap.set("n", "<left>", "<cmd>echo 'Use h to move!!'<CR>")
@@ -116,20 +99,33 @@ vim.keymap.set("n", "<leader>Y", '"+Y', { desc = "[Y]ank until end of line to sy
 vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', { desc = "[p]ut from system clipboard (after)" })
 vim.keymap.set({ "n", "v" }, "<leader>P", '"+P', { desc = "[P]ut from system clipboard (before)" })
 
+vim.api.nvim_create_user_command("Cfg", function()
+	vim.cmd.cd("~/.config/nvim")
+	vim.cmd.e("init.lua")
+
+	-- Restore old position
+	local mark = vim.api.nvim_buf_get_mark(0, '"')
+	local lcount = vim.api.nvim_buf_line_count(0)
+	if mark[1] > 0 and mark[1] <= lcount then
+		pcall(vim.api.nvim_win_set_cursor, 0, mark)
+	end
+end, {})
+
 -- Require
-require("modules.lsp-setup")
 require("modules.colorschemes")
-require("plugins.cord")
-require("plugins.lualine")
-require("plugins.rustaceanvim")
+require("modules.lsp-setup")
+require("plugins.blink-cmp")
 require("plugins.conform")
+require("plugins.cord")
+require("plugins.gitsigns-nvim")
+require("plugins.lualine")
+require("plugins.mini-surround")
 require("plugins.nvim-autopairs")
 require("plugins.nvim-treesitter")
 require("plugins.nvim-treesitter-endwise")
-require("plugins.blink-cmp")
+require("plugins.rustaceanvim")
+require("plugins.tiny-inline-diagnostic-nvim")
 require("plugins.vim-fugitive")
-require("plugins.gitsigns-nvim")
-require("plugins.mini-surround")
 
 -- Current colorscheme
 vim.cmd.colorscheme("everforest")

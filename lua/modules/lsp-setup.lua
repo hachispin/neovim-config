@@ -4,6 +4,7 @@ vim.pack.add({
 	"https://github.com/neovim/nvim-lspconfig",
 })
 
+-- For rosyln (C# LSP)
 require("mason").setup({
 	registries = {
 		"github:mason-org/mason-registry",
