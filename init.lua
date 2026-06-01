@@ -129,11 +129,10 @@ require("plugins.nvim-treesitter-endwise")
 require("plugins.blink-cmp")
 require("plugins.vim-fugitive")
 require("plugins.gitsigns-nvim")
-require("plugins.transparent-nvim")
 require("plugins.mini-surround")
 
 -- Current colorscheme
-vim.cmd("colorscheme everforest")
+vim.cmd.colorscheme("everforest")
 
 -- Neovide specific options
 if vim.g.neovide then
@@ -175,15 +174,15 @@ if vim.g.neovide then
 	local minimum_opacity = 0.5
 	vim.g.neovide_opacity = 1.0
 
-	vim.keymap.set("n", "t=", function()
-		vim.g.neovide_opacity = math.max(minimum_opacity, vim.g.neovide_opacity - opacity_interval)
+	vim.keymap.set("n", "<leader>t=", function()
+		vim.g.neovide_opacity = math.min(1.0, vim.g.neovide_opacity + opacity_interval)
 	end)
 
 	vim.keymap.set("n", "t0", function()
 		vim.g.neovide_opacity = 1.0
 	end)
 
-	vim.keymap.set("n", "t-", function()
-		vim.g.neovide_opacity = math.min(1.0, vim.g.neovide_opacity + opacity_interval)
+	vim.keymap.set("n", "<leader>t-", function()
+		vim.g.neovide_opacity = math.max(minimum_opacity, vim.g.neovide_opacity - opacity_interval)
 	end)
 end
