@@ -132,7 +132,7 @@ if vim.g.neovide then
 	vim.g.neovide_padding_top = 12
 	vim.g.neovide_refresh_rate = 120 -- only applies if --no-vsync is passed
 
-	-- cursor settings
+	-- Cursor settings
 	vim.g.neovide_cursor_cell_color_fallback = true
 	--[[
 	vim.g.neovide_cursor_animation_length = 0.1
