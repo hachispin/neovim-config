@@ -68,10 +68,6 @@
       "rev": "4916d6592ede8c07973490d9322f187e07dfefac",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
-    "nvim-treesitter-endwise": {
-      "rev": "8fe8a95630f4f2c72a87ba1927af649e0bfaa244",
-      "src": "https://github.com/RRethy/nvim-treesitter-endwise"
-    },
     "nvim-web-devicons": {
       "rev": "dfbfaa967a6f7ec50789bead7ef87e336c1fa63c",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
