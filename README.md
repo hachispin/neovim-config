@@ -19,7 +19,6 @@ Loosely based off of [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim
 - lualine: pretty statusline
 - mini.surround: for surround commands
 - nvim-autopairs: pairs stuff
-- nvim-treesitter-endwise: pairs stuff too
 - nvim-treesitter: treesitter is treesitter
 - rustaceanvim: rust integrations
 - tiny-inline-diagnostic.nvim: prettier diagnostics
