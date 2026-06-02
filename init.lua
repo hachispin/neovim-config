@@ -169,7 +169,7 @@ if vim.g.neovide then
 		vim.g.neovide_opacity = math.min(1.0, vim.g.neovide_opacity + opacity_interval)
 	end)
 
-	vim.keymap.set("n", "t0", function()
+	vim.keymap.set("n", "<leader>t0", function()
 		vim.g.neovide_opacity = 1.0
 	end)
 
