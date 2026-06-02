@@ -160,7 +160,7 @@ if vim.g.neovide then
 	end)
 
 	-- Transparency controls
-	-- (NOTE: future self may want vim.g.neovide_normal_opacity)
+	-- NOTE: future self may want vim.g.neovide_normal_opacity
 	local opacity_interval = 0.05
 	local minimum_opacity = 0.5
 	vim.g.neovide_opacity = 1.0
