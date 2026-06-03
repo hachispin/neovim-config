@@ -46,6 +46,7 @@ npairs.add_rules({
 		if not lua_guard(opts) then
 			return false
 		end
+
 		return opts.line:match("^%s*if%s+") ~= nil
 	end),
 
@@ -53,6 +54,7 @@ npairs.add_rules({
 		if not lua_guard(opts) then
 			return false
 		end
+
 		return opts.line:match("^%s*while%s+") ~= nil
 			or opts.line:match("^%s*for%s+") ~= nil
 			or opts.line:match("^%s*do%s*$") ~= nil
@@ -62,21 +64,20 @@ npairs.add_rules({
 		if not lua_guard(opts) then
 			return false
 		end
+
 		if opts.line:match("%f[%w]end%f[%W]") then
 			return false
 		end
+
 		return opts.line:match("^%s*function%s+") ~= nil
 			or opts.line:match("^%s*local%s+function%s+") ~= nil
 			or opts.line:match("=%s*function%s*%(") ~= nil
 	end),
 
 	-- Bash
-	Rule(" ", " ", "sh")
-		:with_pair(function(opts)
-			return opts.line:sub(opts.col - 1, opts.col) == "[]"
-		end)
-		:with_move(cond.done())
-		:with_del(cond.done()),
+	Rule(" ", " ", "sh"):with_pair(function(opts)
+		return opts.line:sub(opts.col - 1, opts.col) == "[]"
+	end):with_move(cond.done()),
 
 	Rule("do", "done", "sh"):end_wise(function(opts)
 		if not sh_guard(opts, "done") then
@@ -92,6 +93,7 @@ npairs.add_rules({
 		if not sh_guard(opts, "esac") then
 			return false
 		end
+
 		return opts.line:match("^%s*case%s+") ~= nil
 	end),
 
@@ -99,6 +101,7 @@ npairs.add_rules({
 		if not sh_guard(opts, "fi") then
 			return false
 		end
+
 		return opts.line:match("^%s*if%s+") ~= nil
 	end),
 })
