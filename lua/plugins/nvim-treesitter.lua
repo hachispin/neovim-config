@@ -1,4 +1,4 @@
-vim.pack.add({ { src = "https://github.com/nvim-treesitter/nvim-treesitter" } })
+vim.pack.add({ "https://github.com/nvim-treesitter/nvim-treesitter" })
 
 local parsers = {
 	"bash",
@@ -18,8 +18,8 @@ local parsers = {
 	"vimdoc",
 }
 
--- No need to call ts.setup({})
 local ts = require("nvim-treesitter")
+ts.setup({ endwise = { enabled = true } })
 ts.install(parsers)
 
 -- Treesitter recommends this
