@@ -6,8 +6,9 @@ Loosely based off of [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim
 
 ## Modules
 
-- lsp-setup: mason, mason-tool-installer, nvim-lspconfig
-- colorschemes: everforest, kanso, kanagawa, poimandres, ...
+- `lsp-setup`: mason, mason-tool-installer, nvim-lspconfig
+- `colorschemes`: everforest, kanso, kanagawa, poimandres, ...
+- `unconfigured-plugins`: self-explanatory
 
 ## Plugins
 
@@ -24,4 +25,5 @@ Loosely based off of [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim
 - `rustaceanvim`: rust integrations
 - `tiny-inline-diagnostic.nvim`: prettier diagnostics
 - `todo-comments.nvim`: highlighted failures
+- `transparent.nvim`: make background transparent
 - `vim-fugitive`: git integrations
