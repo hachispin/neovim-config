@@ -6,11 +6,13 @@ Loosely based off of [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim
 
 ## Modules
 
-- `lsp-setup`: mason, mason-tool-installer, nvim-lspconfig
-- `colorschemes`: everforest, kanso, kanagawa, poimandres, ...
-- `unconfigured-plugins`: self-explanatory
+- `lsp-setup`: sets up certain plugins for LSP support
+- `colorschemes`: a bunch of colorschemes I like
+- `unconfigured-plugins`: plugins that solely use defaults
 
 ## Plugins
+
+This list excludes any colorschemes.
 
 - `blink.cmp`: completions
 - `conform`: formatting
