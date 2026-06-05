@@ -3,6 +3,11 @@ vim.pack.add({
 	"https://github.com/nvim-lualine/lualine.nvim",
 })
 
+local messages = vim.fn.readfile(vim.fn.stdpath("config") .. "/messages.txt")
+local current_message = messages[math.random(#messages)]
+local message_refresh_rate = 2 --seconds
+local message_start = os.time()
+
 require("lualine").setup({
 	sections = {
 		lualine_x = {
@@ -10,25 +15,16 @@ require("lualine").setup({
 			{
 				"encoding",
 				fmt = function(msg)
-					if msg ~= "" then
+					if msg ~= "" or vim.bo.buftype ~= "" then
 						return msg
 					end
 
-					local n = math.random(6)
-
-					if n == 1 then
-						return "haii !!"
-					elseif n == 2 then
-						return "procrastinating?"
-					elseif n == 3 then
-						return ">-<"
-					elseif n == 4 then
-						return "it's OVER"
-					elseif n == 5 then
-						return "get another hobby"
-					elseif n == 6 then
-						return "b-baka!"
+					if os.time() >= message_start + message_refresh_rate then
+						current_message = messages[math.random(#messages)]
+						message_start = os.time()
 					end
+
+					return current_message
 				end,
 			},
 			{ "fileformat" },
@@ -37,11 +33,18 @@ require("lualine").setup({
 				"lsp_status",
 				show_name = false,
 				icons_enabled = false,
-				symbols = { separator = "", done = "" },
 				padding = { left = 0, right = 1 },
+				symbols = {
+					spinner = { "", "", "", "", "", "" },
+					done = "",
+					separator = "",
+				},
+
+				-- Display a question mark if an LSP is available
+				-- but doesn't report its progress (e.g., bashls)
 				fmt = function(msg)
-					if msg == "" and vim.bo.filetype ~= "" then
-						return " "
+					if msg == "" and #vim.lsp.get_clients({ bufnr = 0 }) > 0 then
+						return " "
 					end
 
 					return msg
