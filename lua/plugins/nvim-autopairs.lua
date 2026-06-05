@@ -2,13 +2,11 @@ vim.pack.add({ "https://github.com/windwp/nvim-autopairs" })
 
 local npairs = require("nvim-autopairs")
 local Rule = require("nvim-autopairs.rule")
-local shell_fts = { "sh", "bash", "zsh" }
-npairs.setup({})
+local cond = require("nvim-autopairs.conds")
 
+npairs.setup({})
 npairs.add_rules({
-	Rule(" ", " ", shell_fts):with_pair(function(opts)
+	Rule(" ", " ", { "sh", "bash", "zsh" }):with_pair(function(opts)
 		return opts.line:sub(opts.col - 1, opts.col) == "[]"
-	end):with_move(function(_)
-		return true
-	end),
+	end):with_move(cond.done()),
 })
