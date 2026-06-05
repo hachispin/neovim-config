@@ -11,16 +11,17 @@ Loosely based off of [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim
 
 ## Plugins
 
-- blink.cmp: completions
-- conform: formatting
-- cord: discord status
-- dial.nvim: extended \<C-a\>/\<C-x\>
-- gitsigns.nvim: hunks
-- lualine: pretty statusline
-- mini.surround: for surround commands
-- nvim-autopairs: pairs stuff
-- nvim-treesitter: treesitter is treesitter
-- rustaceanvim: rust integrations
-- tiny-inline-diagnostic.nvim: prettier diagnostics
-- todo-comments.nvim: highlighted failures
-- vim-fugitive.lua: git integrations
+- `blink.cmp`: completions
+- `conform`: formatting
+- `cord`: discord status
+- `dial.nvim`: extended \<C-a\>/\<C-x\>
+- `gitsigns.nvim`: hunks
+- `lualine`: pretty statusline
+- `mini.surround`: for surround commands
+- `nvim-autopairs`: pairs stuff
+- `nvim-treesitter-endwise`: endwise rules
+- `nvim-treesitter`: treesitter is treesitter
+- `rustaceanvim`: rust integrations
+- `tiny-inline-diagnostic.nvim`: prettier diagnostics
+- `todo-comments.nvim`: highlighted failures
+- `vim-fugitive`: git integrations
