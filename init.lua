@@ -73,7 +73,7 @@ vim.keymap.set("n", "<leader>h", function()
 end)
 
 -- Fix
-vim.keymap.set("n", "<leader>f", function()
+vim.keymap.set({ "n", "v" }, "<leader>f", function()
 	vim.lsp.buf.code_action()
 end)
 
