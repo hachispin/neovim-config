@@ -56,4 +56,16 @@ if vim.g.neovide then
 	vim.keymap.set("n", "<leader>t-", function()
 		vim.g.neovide_opacity = math.max(minimum_opacity, vim.g.neovide_opacity - opacity_interval)
 	end)
+
+	vim.keymap.set("n", "<leader>T=", function()
+		vim.g.neovide_normal_opacity = math.min(1.0, vim.g.neovide_normal_opacity + opacity_interval)
+	end)
+
+	vim.keymap.set("n", "<leader>T0", function()
+		vim.g.neovide_normal_opacity = 1.0
+	end)
+
+	vim.keymap.set("n", "<leader>T-", function()
+		vim.g.neovide_normal_opacity = math.max(minimum_opacity, vim.g.neovide_normal_opacity - opacity_interval)
+	end)
 end
