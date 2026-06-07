@@ -3,7 +3,15 @@ vim.pack.add({ "https://github.com/rachartier/tiny-inline-diagnostic.nvim" })
 require("tiny-inline-diagnostic").setup({
 	-- Choose a preset style for diagnostic appearance
 	-- Available: "modern", "classic", "minimal", "powerline", "ghost", "simple", "nonerdfont", "amongus"
-	preset = "powerline",
+	preset = "modern", -- NOTE: Overriden!
+
+	signs = {
+		left = "",
+		right = "",
+		arrow = "  ",
+	},
+
+	blend = { factor = 0.22 },
 
 	-- Make diagnostic background transparent
 	transparent_bg = false,
@@ -18,18 +26,20 @@ require("tiny-inline-diagnostic").setup({
 		-- Display the diagnostic code of diagnostics (e.g., "F401", "no-dupe-args")
 		show_code = false,
 
+		-- Use icons from vim.diagnostic.config instead of preset icons
+		use_icons_from_diagnostic = true,
+
 		-- Color the arrow to match the severity of the first diagnostic
-		set_arrow_to_diag_color = true,
+		set_arrow_to_diag_color = false,
 
 		-- Throttle update frequency in milliseconds to improve performance
 		-- Higher values reduce CPU usage but may feel less responsive
 		-- Set to 0 for immediate updates (may cause lag on slow systems)
-		throttle = 0,
+		throttle = 20,
 
+		-- Control how diagnostic messages are displayed
 		-- NOTE: When using display_count = true, you need to enable multiline diagnostics with multilines.enabled = true
 		--       If you want them to always be displayed, you can also set multilines.always_show = true.
-		--
-		-- Control how diagnostic messages are displayed
 		add_messages = {
 			messages = true, -- Show full diagnostic messages
 			display_count = true, -- Show diagnostic count instead of messages when cursor not on line
@@ -56,7 +66,7 @@ require("tiny-inline-diagnostic").setup({
 		-- Receives diagnostic object, returns formatted string
 		-- Example: function(diag) return diag.message .. " [" .. diag.source .. "]" end
 		format = function(diag) -- Trim to one line
-			return diag.message:match("^[^\r\n]+") or diag
+			return diag.message:match("^[^\r\n]+") or diag.message
 		end,
 
 		-- Automatically disable diagnostics when opening diagnostic float windows

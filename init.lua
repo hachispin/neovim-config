@@ -6,6 +6,7 @@ vim.g.maplocalleader = "."
 require("vim._core.ui2").enable()
 
 vim.o.confirm = true -- ask to save when doing :q on unsaved buffer
+vim.o.cursorline = true -- highlight current line
 vim.o.ignorecase = true -- case-insensitive search by default
 vim.o.inccommand = "split" -- view substitutions live
 vim.o.number = true -- show line number
@@ -13,6 +14,7 @@ vim.o.relativenumber = true -- lines numbers shown relative to the cursor
 vim.o.scrolloff = 10 -- keep 10 lines above/below cursor
 vim.o.shiftwidth = 4 -- amount to shift (<</>>)
 vim.o.showmode = false -- don't show mode (e.g, INSERT)
+vim.o.signcolumn = "yes:1" -- reserve one space in signcolumn always
 vim.o.smartcase = true -- case-sensitive if \C or search contains captial letters
 vim.o.splitbelow = true -- splitting behaviour
 vim.o.splitright = true -- ^
@@ -31,7 +33,17 @@ vim.diagnostic.config({
 	-- Handled by tiny-inline-diagnostic
 	virtual_lines = false,
 	virtual_text = false,
-	signs = false,
+
+	-- Set the signs but don't show them in the column
+	-- (in favour of tiny-inline-diagnostic diag counts)
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = "󰅚 ",
+			[vim.diagnostic.severity.WARN] = "󰀪 ",
+			[vim.diagnostic.severity.INFO] = "󰋽 ",
+			[vim.diagnostic.severity.HINT] = "󰌶 ",
+		},
+	},
 
 	-- Auto open the float when jumping with `[d` and `]d`
 	jump = {
@@ -44,6 +56,12 @@ vim.diagnostic.config({
 		end,
 	},
 })
+
+-- Hide diagnostic signs in column in favour of tiny-inline-diagnostic
+vim.diagnostic.handlers.signs = {
+	show = function(_, _, _, _) end,
+	hide = function(_, _) end,
+}
 
 -- I'm lazy
 vim.keymap.set({ "n", "v" }, ";", ":")

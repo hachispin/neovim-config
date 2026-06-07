@@ -6,7 +6,7 @@ vim.pack.add({ -- colorschemes
 	"https://github.com/olivercederborg/poimandres.nvim",
 })
 
-require("transparent").setup({})
+require("transparent").setup({ extra_groups = { "CursorLine" } })
 vim.g.everforest_enable_italic = true
 vim.g.everforest_background = "hard"
 
