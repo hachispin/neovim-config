@@ -16,8 +16,6 @@ require("dial.config").augends:register_group({
 		augend.date.alias["%H:%M"],
 		augend.constant.alias.bool, -- true<->false
 		augend.constant.alias.Bool, -- True<->False
-		augend.constant.alias.alpha, -- a<->b<->c
-		augend.constant.alias.Alpha, -- A<->B<->C
 		augend.semver.alias.semver, -- inc. MAJOR resets MINOR, PATCH and etc.
 
 		-- Custom stuff
