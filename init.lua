@@ -6,12 +6,11 @@ vim.g.maplocalleader = "."
 require("vim._core.ui2").enable()
 
 vim.o.confirm = true -- ask to save when doing :q on unsaved buffer
-vim.o.cursorline = true -- highlight current line
 vim.o.ignorecase = true -- case-insensitive search by default
 vim.o.inccommand = "split" -- view substitutions live
 vim.o.number = true -- show line number
 vim.o.relativenumber = true -- lines numbers shown relative to the cursor
-vim.o.scrolloff = 10 -- keep 10 lines above and below cursor
+vim.o.scrolloff = 10 -- keep 10 lines above/below cursor
 vim.o.shiftwidth = 4 -- amount to shift (<</>>)
 vim.o.showmode = false -- don't show mode (e.g, INSERT)
 vim.o.smartcase = true -- case-sensitive if \C or search contains captial letters
@@ -32,6 +31,7 @@ vim.diagnostic.config({
 	-- Handled by tiny-inline-diagnostic
 	virtual_lines = false,
 	virtual_text = false,
+	signs = false,
 
 	-- Auto open the float when jumping with `[d` and `]d`
 	jump = {
@@ -61,7 +61,7 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 -- LSP rename (note: must run :wa after)
 vim.keymap.set("n", "<leader>r", function()
 	vim.lsp.buf.rename()
-end, { desc = "LSP rename" })
+end)
 
 -- View diagnostic
 vim.keymap.set("n", "<leader>v", function()
@@ -79,26 +79,29 @@ vim.keymap.set({ "n", "v" }, "<leader>f", function()
 end)
 
 -- Easier split navigation
-vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
-vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
-vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
-vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
+vim.keymap.set("n", "<C-h>", "<C-w><C-h>")
+vim.keymap.set("n", "<C-l>", "<C-w><C-l>")
+vim.keymap.set("n", "<C-j>", "<C-w><C-j>")
+vim.keymap.set("n", "<C-k>", "<C-w><C-k>")
 
 -- Switching buffers with , and .
 vim.keymap.set("n", "<leader>,", function()
 	vim.cmd.bp()
-end, { desc = "Move to previous buffer" })
+end)
 
 vim.keymap.set("n", "<leader>.", function()
 	vim.cmd.bn()
-end, { desc = "Move to next buffer" })
+end)
 
--- Yank/put with/from system clipboard
-vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "[y]ank to system clipboard" })
-vim.keymap.set("n", "<leader>yy", '"+yy', { desc = "[yy]ank current line to system clipboard" })
-vim.keymap.set("n", "<leader>Y", '"+Y', { desc = "[Y]ank until end of line to system clipboard" })
-vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', { desc = "[p]ut from system clipboard (after)" })
-vim.keymap.set({ "n", "v" }, "<leader>P", '"+P', { desc = "[P]ut from system clipboard (before)" })
+-- Yank/put/delete with/from system clipboard
+vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
+vim.keymap.set("n", "<leader>yy", '"+yy')
+vim.keymap.set("n", "<leader>Y", '"+Y')
+vim.keymap.set({ "n", "v" }, "<leader>p", '"+p')
+vim.keymap.set({ "n", "v" }, "<leader>P", '"+P')
+vim.keymap.set({ "n", "v" }, "<leader>d", '"+d')
+vim.keymap.set("n", "<leader>dd", '"+dd')
+vim.keymap.set("n", "<leader>D", '"+D')
 
 vim.api.nvim_create_user_command("Cfg", function()
 	vim.cmd.cd(vim.fn.stdpath("config"))
