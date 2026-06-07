@@ -9,6 +9,10 @@ local message_refresh_rate = 2 --seconds
 local message_start = os.time()
 
 require("lualine").setup({
+	options = {
+		globalstatus = true,
+		always_show_tabline = false,
+	},
 	sections = {
 		lualine_x = {
 			{ "%S", separator = "" },
@@ -27,7 +31,8 @@ require("lualine").setup({
 					return current_message
 				end,
 			},
-			{ "fileformat" },
+			-- i use fedora btw
+			{ "fileformat", symbols = { unix = "" }, color = { fg = "#51A2DA" } },
 			{ "filetype", separator = "", padding = { left = 1, right = 0 } },
 			{
 				"lsp_status",
@@ -35,16 +40,13 @@ require("lualine").setup({
 				icons_enabled = false,
 				padding = { left = 0, right = 1 },
 				symbols = {
-					spinner = { "", "", "", "", "", "" },
 					done = "",
 					separator = "",
 				},
 
-				-- Display a question mark if an LSP is available
-				-- but doesn't report its progress (e.g., bashls)
 				fmt = function(msg)
 					if msg == "" and #vim.lsp.get_clients({ bufnr = 0 }) > 0 then
-						return " "
+						return " "
 					end
 
 					return msg

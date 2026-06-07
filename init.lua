@@ -5,22 +5,23 @@ vim.g.maplocalleader = "."
 -- New UI with pager stuff
 require("vim._core.ui2").enable()
 
-vim.o.winborder = "rounded" -- rounded borders
-vim.o.shiftwidth = 4 -- amount to shift (<</>>)
-vim.o.tabstop = 4 -- visual size of tab (in spaces)
-vim.o.showmode = false -- don't show mode (e.g, INSERT) because i use lualine
-vim.o.relativenumber = true -- lines numbers shown relative to the cursor
+vim.o.confirm = true -- ask to save when doing :q on unsaved buffer
 vim.o.cursorline = true -- highlight current line
-vim.o.number = true -- show line number
+vim.o.ignorecase = true -- case-insensitive search by default
 vim.o.inccommand = "split" -- view substitutions live
+vim.o.number = true -- show line number
+vim.o.relativenumber = true -- lines numbers shown relative to the cursor
+vim.o.scrolloff = 10 -- keep 10 lines above and below cursor
+vim.o.shiftwidth = 4 -- amount to shift (<</>>)
+vim.o.showmode = false -- don't show mode (e.g, INSERT)
+vim.o.smartcase = true -- case-sensitive if \C or search contains captial letters
+vim.o.splitbelow = true -- splitting behaviour
+vim.o.splitright = true -- ^
+vim.o.tabstop = 4 -- visual size of tab (in spaces)
 vim.o.undofile = true -- save undo history to file for persistence
 vim.o.updatetime = 200 -- makes events more responsive (200ms)
-vim.o.scrolloff = 10 -- keep 10 lines above and below cursor
-vim.o.ignorecase = true -- case-insensitive search by default
-vim.o.smartcase = true -- case-sensitive if \C or search contains captial letters
-vim.o.splitright = true -- change splitting behaviour
-vim.o.splitbelow = true -- ^
-vim.o.confirm = true -- ask to save when doing :q on unsaved buffer
+vim.o.winblend = 20 -- transparency for floating windows
+vim.o.winborder = "none" -- border style for floating windows
 
 -- Show partial cmds (in lualine)
 vim.o.cmdheight = 0
@@ -122,58 +123,4 @@ for _, dir in ipairs({ "modules", "plugins" }) do
 	end
 end
 
--- Current colorscheme
-vim.cmd.colorscheme("everforest")
-
--- Neovide specific options
-if vim.g.neovide then
-	-- Window settings
-	vim.g.neovide_scale_factor = 1.0
-	vim.g.neovide_padding_top = 12
-	vim.g.neovide_refresh_rate = 120 -- only applies if --no-vsync is passed
-
-	-- Cursor settings
-	vim.g.neovide_cursor_cell_color_fallback = true
-	--[[
-	vim.g.neovide_cursor_animation_length = 0.1
-    vim.g.neovide_cursor_trail_size = 0.3
-	vim.g.neovide_scroll_animation_length = 0.3
-	--]]
-
-	-- Zooming implementation
-	local sf = 1.125
-
-	local change_scale_factor = function(delta)
-		vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
-	end
-
-	vim.keymap.set("n", "<C-=>", function()
-		change_scale_factor(sf)
-	end)
-
-	vim.keymap.set("n", "<C-0>", function()
-		vim.g.neovide_scale_factor = 1.0
-	end)
-
-	vim.keymap.set("n", "<C-->", function()
-		change_scale_factor(1 / sf)
-	end)
-
-	-- Transparency controls
-	-- NOTE: future self may want vim.g.neovide_normal_opacity
-	local opacity_interval = 0.05
-	local minimum_opacity = 0.5
-	vim.g.neovide_opacity = 1.0
-
-	vim.keymap.set("n", "<leader>t=", function()
-		vim.g.neovide_opacity = math.min(1.0, vim.g.neovide_opacity + opacity_interval)
-	end)
-
-	vim.keymap.set("n", "<leader>t0", function()
-		vim.g.neovide_opacity = 1.0
-	end)
-
-	vim.keymap.set("n", "<leader>t-", function()
-		vim.g.neovide_opacity = math.max(minimum_opacity, vim.g.neovide_opacity - opacity_interval)
-	end)
-end
+-- Colorscheme is set in modules/colorschemes.lua

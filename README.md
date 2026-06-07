@@ -6,8 +6,9 @@ Loosely based off of [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim
 
 ## Modules
 
-- `lsp-setup`: sets up certain plugins for LSP support
 - `colorschemes`: a bunch of colorschemes I like
+- `lsp-setup`: sets up certain plugins for LSP support
+- `neovide`: specific options for Neovide
 - `unconfigured-plugins`: plugins that solely use defaults
 
 ## Plugins
