@@ -39,7 +39,7 @@ require("mason-tool-installer").setup({
 vim.lsp.config("lua_ls", {
 	settings = {
 		Lua = {
-			diagnostics = { globals = { "vim" } },
+			diagnostics = { globals = { "vim" }, disable = { "trailing-space" } },
 			format = { enable = false },
 			runtime = { version = "LuaJIT" },
 			workspace = { library = vim.api.nvim_get_runtime_file("", true) },
