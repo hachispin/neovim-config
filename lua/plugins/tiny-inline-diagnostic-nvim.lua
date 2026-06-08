@@ -30,7 +30,7 @@ require("tiny-inline-diagnostic").setup({
 		use_icons_from_diagnostic = true,
 
 		-- Color the arrow to match the severity of the first diagnostic
-		set_arrow_to_diag_color = false,
+		set_arrow_to_diag_color = true,
 
 		-- Throttle update frequency in milliseconds to improve performance
 		-- Higher values reduce CPU usage but may feel less responsive
