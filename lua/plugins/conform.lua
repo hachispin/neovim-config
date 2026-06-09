@@ -7,7 +7,7 @@ require("conform").setup({
 		javascript = { "prettierd" },
 		lua = { "stylua" },
 		python = { "isort", "ruff_format" },
-		-- rust = { "rustfmt" }, (rustaceanvim)
+		rust = { "rustfmt" },
 	},
 })
 
