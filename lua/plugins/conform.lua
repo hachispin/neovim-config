@@ -6,6 +6,7 @@ require("conform").setup({
 		cpp = { "clang-format" },
 		javascript = { "prettierd" },
 		lua = { "stylua" },
+		markdown = { "prettierd" },
 		python = { "isort", "ruff_format" },
 		rust = { "rustfmt" },
 	},
