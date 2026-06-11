@@ -1,8 +1,21 @@
 # neovim-config
 
-My [Neovim](https://github.com/neovim/neovim) config that I try to keep this quite minimal.
+My [Neovim](https://github.com/neovim/neovim) config that I try
+to keep this quite minimal. If you want to use this, simply clone
+this repository into your config path (usually `~/.config/nvim/`).
 
 Loosely based off of [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim).
+
+# Setup
+
+Some general info about my config:
+
+- Pretty opinionated, I'd say
+- Uses [`vim.pack`](https://neovim.io/doc/user/pack/#_plugin-manager)
+- Intended for the latest nightly Neovim release
+  - Enables [UI2](https://neovim.io/doc/user/lua/#_ui2) for a better experience with `cmdheight=0`
+  - Plugins are loaded faster with [`vim.loader`](https://neovim.io/doc/user/lua/#vim.loader)
+- Targets writing in Rust, C++, C, Lua and Bash
 
 ## Modules
 
@@ -26,7 +39,14 @@ This list excludes any colorschemes.
 - `nvim-treesitter-endwise`: endwise rules
 - `nvim-treesitter`: treesitter is treesitter
 - `rustaceanvim`: rust integrations
+- `tiny-glimmer.nvim`: operator animations
 - `tiny-inline-diagnostic.nvim`: prettier diagnostics
 - `todo-comments.nvim`: highlighted failures
-- `transparent.nvim`: make background transparent
 - `vim-fugitive`: git integrations
+
+# Showcase
+
+Neovide, 20% transparency, custom Iosevka build, Cipher from hit game
+_Honkers Railway_ ([creds](https://www.pixiv.net/en/artworks/128665632)).
+
+![A screenshot of some Rust code with this config](./showcase.png)
