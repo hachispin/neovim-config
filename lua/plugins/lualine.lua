@@ -32,7 +32,7 @@ require("lualine").setup({
 					return current_message
 				end,
 			},
-			-- i use fedora btw
+			-- I use fedora BTW
 			{ "fileformat", symbols = { unix = "" }, color = { fg = "#51A2DA" } },
 			{ "filetype", separator = "", padding = { left = 1, right = 0 } },
 			{
@@ -46,8 +46,16 @@ require("lualine").setup({
 				},
 
 				fmt = function(msg)
-					if msg == "" and #vim.lsp.get_clients({ bufnr = 0 }) > 0 then
-						return " "
+					if msg == "" then
+						-- LSP but no status
+						if #vim.lsp.get_clients({ bufnr = 0 }) > 0 then
+							return " "
+						end
+
+						-- No LSP at all, but isn't like [No Name] or whatever
+						if vim.bo.filetype ~= "" then
+							return " "
+						end
 					end
 
 					return msg
