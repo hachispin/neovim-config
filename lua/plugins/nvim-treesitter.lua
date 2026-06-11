@@ -19,7 +19,7 @@ local parsers = {
 }
 
 local ts = require("nvim-treesitter")
-ts.setup({ endwise = { enabled = true } })
+ts.setup({ endwise = { enabled = true }, autopairs = { enabled = true } })
 ts.install(parsers)
 
 -- Treesitter recommends this
