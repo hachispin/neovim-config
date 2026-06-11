@@ -3,7 +3,7 @@ vim.pack.add({
 	"https://github.com/nvim-lualine/lualine.nvim",
 })
 
-local messages = vim.fn.readfile(vim.fn.stdpath("config") .. "/messages.txt")
+local ok, messages = pcall(vim.fn.readfile, vim.fn.stdpath("config") .. "/messages.txt")
 local current_message = messages[math.random(#messages)]
 local message_refresh_rate = 2 --seconds
 local message_start = os.time()
@@ -20,7 +20,7 @@ require("lualine").setup({
 			{
 				"encoding",
 				fmt = function(msg)
-					if msg ~= "" or vim.bo.buftype ~= "" then
+					if msg ~= "" or vim.bo.buftype ~= "" or not ok then
 						return msg
 					end
 
