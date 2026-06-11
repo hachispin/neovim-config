@@ -8,11 +8,14 @@ vim.g.maplocalleader = "."
 -- New UI with pager stuff
 require("vim._core.ui2").enable()
 
+local blend = 20
+
 vim.o.confirm = true -- ask to save when doing :q on unsaved buffer
 vim.o.cursorline = true -- highlight current line
 vim.o.ignorecase = true -- case-insensitive search by default
 vim.o.inccommand = "split" -- view substitutions live
 vim.o.number = true -- show line number
+vim.o.pumblend = blend -- pop up menu blending
 vim.o.relativenumber = true -- lines numbers shown relative to the cursor
 vim.o.scrolloff = 10 -- keep 10 lines above/below cursor
 vim.o.shiftwidth = 4 -- amount to shift (<</>>)
@@ -24,7 +27,7 @@ vim.o.splitright = true -- ^
 vim.o.tabstop = 4 -- visual size of tab (in spaces)
 vim.o.undofile = true -- save undo history to file for persistence
 vim.o.updatetime = 200 -- makes events more responsive (200ms)
-vim.o.winblend = 20 -- transparency for floating windows
+vim.o.winblend = blend -- transparency for floating windows
 vim.o.winborder = "none" -- border style for floating windows
 
 -- Show partial cmds (in lualine)
@@ -141,6 +144,15 @@ vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI", "BufEnter" }, {
 			view.topline = view.topline + off - (win_h - rem + dist)
 			vim.fn.winrestview(view)
 		end
+	end,
+})
+
+-- Prevent jumpy indents from the namespace resolution
+-- operator initially being taken as a label.
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "cpp",
+	callback = function(_)
+		vim.cmd.setlocal("indentkeys-=:")
 	end,
 })
 
