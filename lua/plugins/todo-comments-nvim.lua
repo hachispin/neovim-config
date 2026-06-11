@@ -11,20 +11,8 @@ require("todo-comments").setup({
 		NOTE = { alt = { "INFO", "TIP", "SAFETY", "N.B", "NB" } },
 		TEST = { alt = { "TESTING", "PASSED", "FAILED", "PASS", "FAIL" } },
 	},
-	highlight = {
-		pattern = [[.*<(KEYWORDS)(\([^)]*\))?\s*:]],
-	},
-	search = {
-		pattern = [[\b(KEYWORDS)(\([^)]*\))?:]],
-	},
-})
 
--- FIXME(what-to-fix): Hi
---
--- FIXME: Hi
---
--- TODO: Hi
---
--- FIXME(): Hi
---
--- FIXME(what-to-fix-man): The future of business isn't coming -- it's _here_.
+	-- Allows, e.g., "FIXME(issue-to-fix): ..." to be highlighted.
+	search = { pattern = [[\b(KEYWORDS)(\([^\)]*\))?:]] },
+	highlight = { pattern = [[.*<((KEYWORDS)%(\(.{-1,}\))?):]] },
+})

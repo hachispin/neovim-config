@@ -1,5 +1,6 @@
 vim.pack.add({ "https://github.com/rachartier/tiny-glimmer.nvim" })
 
+-- TODO: Animate <leader> prefixed keybinds
 require("tiny-glimmer").setup({
 	-- Enable/disable the plugin
 	enabled = true,
