@@ -11,7 +11,7 @@ Loosely based off of [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim
 Some general info about my config:
 
 - Pretty opinionated, I'd say
-- Uses [`vim.pack`](https://neovim.io/doc/user/pack/#_plugin-manager)
+- Uses the native [`vim.pack`](https://neovim.io/doc/user/pack/#_plugin-manager) plugin manager
 - Intended for the latest nightly Neovim release
   - Enables [UI2](https://neovim.io/doc/user/lua/#_ui2) for a better experience with `cmdheight=0`
   - Plugins are loaded faster with [`vim.loader`](https://neovim.io/doc/user/lua/#vim.loader)
