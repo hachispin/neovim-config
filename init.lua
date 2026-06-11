@@ -29,6 +29,7 @@ vim.o.undofile = true -- save undo history to file for persistence
 vim.o.updatetime = 200 -- makes events more responsive (200ms)
 vim.o.winblend = blend -- transparency for floating windows
 vim.o.winborder = "none" -- border style for floating windows
+vim.o.wrap = false -- i don't like it ok
 
 -- Show partial cmds (in lualine)
 vim.o.cmdheight = 0
