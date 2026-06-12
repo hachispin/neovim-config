@@ -3,7 +3,7 @@ vim.pack.add({ "https://github.com/rachartier/tiny-inline-diagnostic.nvim" })
 require("tiny-inline-diagnostic").setup({
 	-- Choose a preset style for diagnostic appearance
 	-- Available: "modern", "classic", "minimal", "powerline", "ghost", "simple", "nonerdfont", "amongus"
-	preset = "modern", -- NOTE: Overriden!
+	preset = "modern", -- NOTE: Overridden!
 
 	signs = {
 		left = "",

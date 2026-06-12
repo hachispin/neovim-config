@@ -21,7 +21,7 @@ vim.o.scrolloff = 10 -- keep 10 lines above/below cursor
 vim.o.shiftwidth = 4 -- amount to shift (<</>>)
 vim.o.showmode = false -- don't show mode (e.g, INSERT)
 vim.o.signcolumn = "yes:1" -- reserve one space in signcolumn always
-vim.o.smartcase = true -- case-sensitive if \C or search contains captial letters
+vim.o.smartcase = true -- case-sensitive if \C or search contains capital letters
 vim.o.splitbelow = true -- splitting behaviour
 vim.o.splitright = true -- ^
 vim.o.tabstop = 4 -- visual size of tab (in spaces)
@@ -129,10 +129,12 @@ vim.keymap.set({ "n", "v" }, "<leader>d", '"+d')
 vim.keymap.set("n", "<leader>dd", '"+dd')
 vim.keymap.set("n", "<leader>D", '"+D')
 
--- NOTE: This should be replaced with scrolloffpad if it
--- ever receives the options to replicate this behaviour.
+-- NOTE: This may cause some issues if cols < scrolloff * 2
+-- while writing on the last line with some terminals.
 --
--- Make scrolloff behave as you'd expect when approaching EOF
+-- Make scrolloff behave as you'd expect when approaching
+-- EOF. This should be replaced with scrolloffpad if it
+-- ever receives the options to replicate this behaviour.
 vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI", "BufEnter" }, {
 	group = vim.api.nvim_create_augroup("ScrollOffEOF", {}),
 	callback = function()
@@ -149,7 +151,7 @@ vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI", "BufEnter" }, {
 })
 
 -- Prevent jumpy indents from the namespace resolution
--- operator initially being taken as a label.
+-- operator initially being taken as a label in C++.
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "cpp",
 	callback = function(_)
