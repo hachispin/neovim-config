@@ -53,7 +53,8 @@ end)
 
 local function sync_opacity_cursorline()
 	local blend = math.floor((1 - vim.g.neovide_normal_opacity) * 100)
-	vim.cmd.highlight({ "CursorLine", "blend=" .. blend })
+	local hl = vim.api.nvim_get_hl(0, { name = "CursorLine", link = false })
+	vim.api.nvim_set_hl(0, "CursorLine", vim.tbl_extend("force", hl, { blend = blend }))
 end
 
 local function add_opacity(interval)
