@@ -1,4 +1,4 @@
-# neovim-config
+# nvim-config
 
 My [Neovim](https://github.com/neovim/neovim) config that I try
 to keep this quite minimal. If you want to use this, simply clone
