@@ -129,7 +129,7 @@ vim.keymap.set({ "n", "v" }, "<leader>d", '"+d')
 vim.keymap.set("n", "<leader>dd", '"+dd')
 vim.keymap.set("n", "<leader>D", '"+D')
 
--- NOTE: This may cause some issues if cols < scrolloff * 2
+-- WARN: This may cause some issues if cols < scrolloff * 2
 -- while writing on the last line with some terminals.
 --
 -- Make scrolloff behave as you'd expect when approaching

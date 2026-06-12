@@ -41,7 +41,7 @@ require("lualine").setup({
 				icons_enabled = false,
 				padding = { left = 0, right = 1 },
 				symbols = {
-					done = "",
+					done = "󰄭",
 					separator = "",
 				},
 
@@ -49,7 +49,7 @@ require("lualine").setup({
 					if msg == "" then
 						-- LSP but no status
 						if #vim.lsp.get_clients({ bufnr = 0 }) > 0 then
-							return " "
+							return " 󰄬"
 						end
 
 						-- No LSP at all, but isn't like [No Name] or whatever
