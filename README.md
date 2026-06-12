@@ -46,7 +46,7 @@ This list excludes any colorschemes.
 
 # Showcase
 
-Neovide, 20% transparency, custom Iosevka build, Cipher from hit game
-_Honkers Railway_ ([creds](https://www.pixiv.net/en/artworks/128665632)).
+Neovide, 20% transparency, [Nordic theme](https://github.com/alexvzyl/nordic.nvim), custom Iosevka
+build, Cipher from hit game _Honkers Railway_ ([creds](https://www.pixiv.net/en/artworks/128665632)).
 
 ![A screenshot of some Rust code with this config](./showcase.png)
