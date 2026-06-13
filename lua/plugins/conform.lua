@@ -9,6 +9,7 @@ require("conform").setup({
 		markdown = { "prettierd" },
 		python = { "isort", "ruff_format" },
 		rust = { "rustfmt" },
+		sh = { "shfmt" },
 		toml = { "tombi" },
 	},
 })
