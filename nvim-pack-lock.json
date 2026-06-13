@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "ashen.nvim": {
+      "rev": "bfb04bd50b69d863469b2deb9fb361cf0d945ba7",
+      "src": "https://github.com/ficd0/ashen.nvim"
+    },
     "blink.cmp": {
       "rev": "b02ac65634bdb8af2dcc4eb6c807c060e1e15ae6",
       "src": "https://github.com/saghen/blink.cmp"
@@ -27,10 +31,6 @@
     "gitsigns.nvim": {
       "rev": "25050e4ed39e628282831d4cbecb1850454ce915",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
-    },
-    "gruvbox-material": {
-      "rev": "11d779b26a9ab2b3db8c22c6ac9fb6e8ed4fea79",
-      "src": "https://github.com/sainnhe/gruvbox-material"
     },
     "lualine.nvim": {
       "rev": "221ce6b2d999187044529f49da6554a92f740a96",
@@ -76,12 +76,16 @@
       "rev": "dfbfaa967a6f7ec50789bead7ef87e336c1fa63c",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
+    "palenight.nvim": {
+      "rev": "97df63f5a903ea4a21f712d284b138ba0ee3f615",
+      "src": "https://github.com/alexmozaidze/palenight.nvim"
+    },
     "poimandres.nvim": {
       "rev": "a488957d803943a4201ac3b774913fcafa9e6b3a",
       "src": "https://github.com/olivercederborg/poimandres.nvim"
     },
     "rustaceanvim": {
-      "rev": "7e13178fd700669a4c1d8fa2d273d25d24fe6fb4",
+      "rev": "25dc5530a6d5e92d0ade9e3c7953dd9b34e867a0",
       "src": "https://github.com/mrcjkb/rustaceanvim"
     },
     "tiny-glimmer.nvim": {

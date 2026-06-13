@@ -1,15 +1,11 @@
 vim.pack.add({ -- colorschemes
-	"https://github.com/alexvzyl/nordic.nvim",
-	"https://github.com/olivercederborg/poimandres.nvim",
-	"https://github.com/sainnhe/everforest",
-	"https://github.com/sainnhe/gruvbox-material",
-	"https://github.com/savq/melange-nvim",
+	"https://github.com/alexvzyl/nordic.nvim", -- nordic
+	"https://github.com/olivercederborg/poimandres.nvim", -- poimandres
+	"https://github.com/sainnhe/everforest", -- everforest
+	"https://github.com/savq/melange-nvim", -- melange
+	"https://github.com/alexmozaidze/palenight.nvim", -- palenight
+	"https://github.com/ficd0/ashen.nvim", -- ashen
 })
 
-local use_italic = false
-
-vim.g.everforest_enable_italic = use_italic
-vim.g.everforest_background = "hard"
-vim.g.gruvbox_material_background = "hard"
-
-vim.cmd.colorscheme("melange")
+require("palenight").setup({ italic = true })
+vim.cmd.colorscheme("palenight")
