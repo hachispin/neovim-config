@@ -15,7 +15,7 @@ Some general info about my config:
 - Intended for the latest nightly Neovim release
   - Enables [UI2](https://neovim.io/doc/user/lua/#_ui2) for a better experience with `cmdheight=0`
   - Plugins are loaded faster with [`vim.loader`](https://neovim.io/doc/user/lua/#vim.loader)
-- Targets writing in Rust, C++, C, Lua and Bash
+- Targets writing in Rust, C++, C, Lua, Python and Bash
 
 ## Modules
 
@@ -26,27 +26,33 @@ Some general info about my config:
 
 ## Plugins
 
-This list excludes any colorschemes.
+Includes any plugin installed in [Modules](#modules) except `colorschemes`.
 
-- `blink.cmp`: completions
-- `conform`: formatting
-- `cord`: discord status
-- `dial.nvim`: extended \<C-a\>/\<C-x\>
-- `gitsigns.nvim`: hunks
-- `lualine`: pretty statusline
-- `mini.surround`: for surround commands
-- `nvim-autopairs`: pairs stuff
-- `nvim-treesitter-endwise`: endwise rules
+- `blink.cmp`: fast completions with LSP support and much more
+- `conform`: sets up formatting via LSPs or formatters
+- `cord`: sets a configurable discord status (via rpc)
+- `dial.nvim`: for extending \<C-a\>/\<C-x\> functionality
+- `gitsigns.nvim`: allows better control of git hunks
+- `lualine`: shows a prettier and easy-to-configure statusline
+- `mason-tool-installer.nvim`: ensures certain mason tools are installed
+- `mason.nvim`: allows easier installation of LSPs, DAPS, etc
+- `mini.surround`: adds the `s`urround operator (e.g,. `sr"'`: `"hi" -> 'hi'`)
+- `nvim-autopairs`: pairs and also allows custom pairing rules
+- `nvim-lspconfig`: provides default configs for LSPs
+- `nvim-treesitter-endwise`: pairs that trigger on \<CR\>, e.g., for `if` statements
 - `nvim-treesitter`: treesitter is treesitter
-- `rustaceanvim`: rust integrations
-- `tiny-glimmer.nvim`: operator animations
-- `tiny-inline-diagnostic.nvim`: prettier diagnostics
-- `todo-comments.nvim`: highlighted failures
-- `vim-fugitive`: git integrations
+- `rustaceanvim`: sets up rust integrations
+- `tiny-glimmer.nvim`: shows animations on yank, put, undo, redo
+- `tiny-inline-diagnostic.nvim`: makes diagnostics prettier and wrap
+- `todo-comments.nvim`: highlights comments such as `TODO: …`, `FIX: …`, etc.
+- `vim-fugitive`: improves git experience with `:Git` (over `:!git`)
+
+<!-- NOTE(for-my-sanity): Don't try replacing nvim-treesitter-endwise with
+     nvim-autopairs' endwise rules. You WILL go insane. Trust me. X_X -->
 
 # Showcase
 
 Neovide, 20% transparency, [Melange theme](https://github.com/savq/melange-nvim), a
-custom Iosevka build and [this wallpaper](https://danbooru.donmai.us/posts/10183325)
+custom Iosevka build and [this wallpaper](https://danbooru.donmai.us/posts/10183325).
 
 ![A screenshot of some Rust code with this config](./showcase.png)
