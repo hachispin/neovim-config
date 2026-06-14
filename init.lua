@@ -3,35 +3,44 @@ vim.loader.enable()
 
 -- Leader key
 vim.g.mapleader = " "
-vim.g.maplocalleader = "."
 
--- New UI with pager stuff
+-- General
+vim.o.confirm = true
+vim.o.inccommand = "split"
+vim.o.shiftwidth = 4
+vim.o.tabstop = 4
+vim.o.timeoutlen = 300
+vim.o.undofile = true
+vim.o.updatetime = 200
+
+-- Visual improvements
 require("vim._core.ui2").enable()
+vim.o.cursorline = true
+vim.o.scrolloff = 10
+vim.o.showbreak = "󱞵 "
+vim.o.showmode = false
+vim.o.signcolumn = "yes:1"
+vim.o.winborder = "rounded"
 
-local blend = 20
+-- Line numbers (relative)
+vim.o.number = true
+vim.o.relativenumber = true
 
-vim.o.confirm = true -- ask to save when doing :q on unsaved buffer
-vim.o.cursorline = true -- highlight current line
-vim.o.ignorecase = true -- case-insensitive search by default
-vim.o.inccommand = "split" -- view substitutions live
-vim.o.number = true -- show line number
-vim.o.pumblend = blend -- pop up menu blending
-vim.o.relativenumber = true -- lines numbers shown relative to the cursor
-vim.o.scrolloff = 10 -- keep 10 lines above/below cursor
-vim.o.shiftwidth = 4 -- amount to shift (<</>>)
-vim.o.showmode = false -- don't show mode (e.g, INSERT)
-vim.o.signcolumn = "yes:1" -- reserve one space in signcolumn always
-vim.o.smartcase = true -- case-sensitive if \C or search contains capital letters
-vim.o.splitbelow = true -- splitting behaviour
-vim.o.splitright = true -- ^
-vim.o.tabstop = 4 -- visual size of tab (in spaces)
-vim.o.undofile = true -- save undo history to file for persistence
-vim.o.updatetime = 200 -- makes events more responsive (200ms)
-vim.o.winblend = blend -- transparency for floating windows
-vim.o.winborder = "none" -- border style for floating windows
-vim.o.wrap = false -- i don't like it ok
+-- Less annyoing searching
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+vim.o.ignorecase = true
+vim.o.smartcase = true
 
--- Show partial cmds (in lualine)
+-- Splitting behaviour
+vim.o.splitbelow = true
+vim.o.splitright = true
+
+-- Blending
+vim.o.winblend = 20
+vim.o.pumblend = 20
+
+-- Hide command area when it's not being used while still
+-- showing partial commands in statusline (or lualine)
 vim.o.cmdheight = 0
 vim.o.showcmd = true
 vim.o.showcmdloc = "statusline"
@@ -75,31 +84,20 @@ vim.diagnostic.handlers.signs = {
 vim.keymap.set({ "n", "v" }, ";", ":")
 vim.keymap.set({ "n", "v" }, ":", ":!")
 
--- Be annoying
-vim.keymap.set("n", "<left>", "<cmd>echo 'Use h to move!!'<CR>")
-vim.keymap.set("n", "<down>", "<cmd>echo 'Use j to move!!'<CR>")
-vim.keymap.set("n", "<up>", "<cmd>echo 'Use k to move!!'<CR>")
-vim.keymap.set("n", "<right>", "<cmd>echo 'Use l to move!!'<CR>")
-
--- Clear highlights from search
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
-
--- LSP rename (note: must run :wa after)
+-- LSP keymaps
 vim.keymap.set("n", "<leader>r", function()
+	-- NOTE: Must run :wa afterwards
 	vim.lsp.buf.rename()
 end)
 
--- View diagnostic
 vim.keymap.set("n", "<leader>v", function()
 	vim.diagnostic.open_float()
 end)
 
--- Toggle inlay hints
 vim.keymap.set("n", "<leader>h", function()
 	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end)
 
--- Fix
 vim.keymap.set({ "n", "v" }, "<leader>f", function()
 	vim.lsp.buf.code_action()
 end)
