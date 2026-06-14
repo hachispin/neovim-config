@@ -4,6 +4,9 @@ My [Neovim](https://github.com/neovim/neovim) config that I try
 to keep this quite minimal. If you want to use this, simply clone
 this repository into your config path (usually `~/.config/nvim/`).
 
+I've also documented what I've done to try and reduce
+startup times in [PERFORMANCE.md](./PERFORMANCE.md).
+
 Loosely based off of [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim).
 
 # Setup

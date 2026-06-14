@@ -70,8 +70,9 @@ So colorschemes, eh? Everforest by itself takes more time to load than clean Neo
 
 ∘ ∘ ∘ ( °ヮ° ) ?
 
-Alright. Time to defer `blink.cmp` to `{"InsertEnter", "CmdLineEnter}`. As for colorschemes, the
-_active_ colorscheme will still be eagerly loaded, while everything else will just be made lazy.
+Alright. Time to defer `blink.cmp` to `{"InsertEnter", "CmdLineEnter"}`. As for colorschemes,
+the _active_ colorscheme will still be eagerly loaded, while everything else will just
+be made lazy. This prevents sudden flashes (especially when using light mode) at startup.
 
 Some other things I did was:
 
