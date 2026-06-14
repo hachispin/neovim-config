@@ -118,11 +118,13 @@ vim.keymap.set("n", "<leader>.", function()
 end)
 
 -- Yank/put/delete with/from system clipboard
+--
+-- remap=true is needed for glimmer highlights to work.
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
 vim.keymap.set("n", "<leader>yy", '"+yy')
-vim.keymap.set("n", "<leader>Y", '"+Y')
-vim.keymap.set({ "n", "v" }, "<leader>p", '"+p')
-vim.keymap.set({ "n", "v" }, "<leader>P", '"+P')
+vim.keymap.set("n", "<leader>Y", '"+Y', { remap = true })
+vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', { remap = true })
+vim.keymap.set({ "n", "v" }, "<leader>P", '"+P', { remap = true })
 vim.keymap.set({ "n", "v" }, "<leader>d", '"+d')
 vim.keymap.set("n", "<leader>dd", '"+dd')
 vim.keymap.set("n", "<leader>D", '"+D')
@@ -148,6 +150,27 @@ vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI", "BufEnter" }, {
 	end,
 })
 
+-- Restore old cursor position when opening buffers
+vim.api.nvim_create_autocmd("BufRead", {
+	callback = function(opts)
+		vim.api.nvim_create_autocmd("BufWinEnter", {
+			once = true,
+			buffer = opts.buf,
+			callback = function()
+				local ft = vim.bo[opts.buf].filetype
+				local last_known_line = vim.api.nvim_buf_get_mark(opts.buf, '"')[1]
+				if
+					not (ft:match("commit") or ft:match("rebase"))
+					and last_known_line > 1
+					and last_known_line <= vim.api.nvim_buf_line_count(opts.buf)
+				then
+					vim.api.nvim_feedkeys([[g`"]], "nx", false)
+				end
+			end,
+		})
+	end,
+})
+
 -- Prevent jumpy indents from the namespace resolution
 -- operator initially being taken as a label in C++.
 vim.api.nvim_create_autocmd("FileType", {
@@ -157,17 +180,9 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
-vim.api.nvim_create_user_command("Cfg", function()
-	vim.cmd.cd(vim.fn.stdpath("config"))
-	vim.cmd.e("init.lua")
-
-	-- Restore old position
-	local mark = vim.api.nvim_buf_get_mark(0, '"')
-	local lcount = vim.api.nvim_buf_line_count(0)
-	if mark[1] > 0 and mark[1] <= lcount then
-		pcall(vim.api.nvim_win_set_cursor, 0, mark)
-	end
-end, {})
+-- HACK: Relative path shenanigans
+local choice_to_path = { ["init"] = "../init" }
+local choices = { "init" }
 
 -- Auto require plugins and modules
 for _, dir in ipairs({ "modules", "plugins" }) do
@@ -176,8 +191,37 @@ for _, dir in ipairs({ "modules", "plugins" }) do
 	for _, file in ipairs(vim.fn.glob(path .. "*.lua", false, true)) do
 		local basename = vim.fs.basename(file)
 		local filename = basename:sub(1, basename:len() - 4)
+		choice_to_path[filename] = dir .. "/" .. filename
+		choices[#choices + 1] = filename
 		require(dir .. "." .. filename)
 	end
 end
+
+vim.api.nvim_create_user_command("Cfg", function(opts)
+	local config = vim.fn.stdpath("config")
+	local prefix = config .. "/lua/"
+
+	vim.cmd.cd(config)
+
+	if opts.args == "" then
+		vim.cmd.e("init.lua")
+		return
+	end
+
+	for _, choice in ipairs(opts.fargs) do
+		if not vim.tbl_contains(choices, choice) then
+			vim.notify("Invalid option: " .. choice, vim.log.levels.ERROR)
+			return
+		end
+
+		local relpath = choice_to_path[choice] .. ".lua"
+		vim.cmd.e(prefix .. relpath)
+	end
+end, {
+	nargs = "*",
+	complete = function()
+		return choices
+	end,
+})
 
 -- Colorscheme is set in modules/colorschemes.lua
