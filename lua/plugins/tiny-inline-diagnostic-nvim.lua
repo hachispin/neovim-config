@@ -1,6 +1,4 @@
-vim.pack.add({ "https://github.com/rachartier/tiny-inline-diagnostic.nvim" })
-
-require("tiny-inline-diagnostic").setup({
+local opts = {
 	-- Choose a preset style for diagnostic appearance
 	-- Available: "modern", "classic", "minimal", "powerline", "ghost", "simple", "nonerdfont", "amongus"
 	preset = "powerline", -- NOTE: Overridden!
@@ -78,4 +76,9 @@ require("tiny-inline-diagnostic").setup({
 		-- Automatically disable diagnostics when opening diagnostic float windows
 		override_open_float = true,
 	},
-})
+}
+
+lazy_later(function()
+	vim.pack.add({ "https://github.com/rachartier/tiny-inline-diagnostic.nvim" })
+	require("tiny-inline-diagnostic").setup(opts)
+end)

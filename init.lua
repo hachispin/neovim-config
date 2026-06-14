@@ -180,6 +180,18 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+-- For lazy loading
+vim.pack.add({ "https://github.com/nvim-mini/mini.misc" })
+local misc = require("mini.misc")
+
+_G.lazy_later = function(f)
+	misc.safely("later", f)
+end
+
+_G.lazy_on_event = function(ev, f)
+	misc.safely("event:" .. ev, f)
+end
+
 -- HACK: Relative path shenanigans
 local choice_to_path = { ["init"] = "../init" }
 local choices = { "init" }
