@@ -32,26 +32,22 @@ I could've just used `hyperfine` but this _should_ be more accurate.
 
 ## Lazy-loading
 
-Before attempting to lazy-load any plugins:
-
-- Initial startup time: ~46.5ms
-- For reference, clean: ~4.5ms
+Before attempting to lazy-load any plugins, I had an initial startup time of **~46.5ms**.
+For reference, the startup time of a Neovim with `--clean` (no plugins) was **4.5ms**.
 
 In order to set-up lazy-loading with `vim.pack`, I read echasnovski's (creator of `mini.nvim`) guide
 ([here](https://echasnovski.com/blog/2026-03-13-a-guide-to-vim-pack#lazy-loading)) and used the
 `mini.misc` plugin. Some easy targets were `nvim-autopairs` (event) and `tiny-inline-diagnostic`.
-
 [This](https://fredrikaverpil.github.io/blog/2026/04/15/from-lazy.nvim-to-vim.pack/) also helped.
 
-- Afterwards: ~42.5ms
-
-Very slight improvement. Maybe I should actually look at what's taking up all the time…
+This led to a new startup time of **~42.5ms**, which was an (albeit slight)
+improvement. Maybe I should actually look at what's taking up all the time…
 
 ```bash
 ❯ nvim --headless --startuptime /dev/stdout +q 2>/dev/null | sort --numeric-sort --key 2n | tail -n10
 ```
 
-Leads to this output:
+That command leads to this output:
 
 ```text
 035.186  001.765  000.377: require('plugins.nvim-treesitter')
@@ -66,18 +62,19 @@ Leads to this output:
 037.275  034.168  000.930: sourcing /home/rain/.config/nvim/init.lua
 ```
 
-So colorschemes, eh? Everforest by itself takes more time to load than clean Neovim…
+So colorschemes are the problem, huh? Everforest by
+itself takes more time to load than clean Neovim…
 
 ∘ ∘ ∘ ( °ヮ° ) ?
 
 Alright. Time to defer `blink.cmp` to `{"InsertEnter", "CmdLineEnter"}`. As for colorschemes,
-the _active_ colorscheme will still be eagerly loaded, while everything else will just
-be made lazy. This prevents sudden flashes (especially when using light mode) at startup.
+the _active_ colorscheme will still be eagerly loaded, while everything else will just be made
+lazy. This prevents sudden flashes (especially when using light mode) at startup. Some other
+things I did was switch Everforest to a Lua port and delete the ShaDa (shared data) file.
 
-Some other things I did was switch Everforest to a
-Lua port and delete the ShaDa (shared data) file.
+This led to a new startup time of - drumroll please - …
 
-- Afterwards: ~34.0ms
+**~34.0ms**!
 
 ## Results
 
