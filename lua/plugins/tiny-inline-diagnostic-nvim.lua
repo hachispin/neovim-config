@@ -3,16 +3,24 @@ vim.pack.add({ "https://github.com/rachartier/tiny-inline-diagnostic.nvim" })
 require("tiny-inline-diagnostic").setup({
 	-- Choose a preset style for diagnostic appearance
 	-- Available: "modern", "classic", "minimal", "powerline", "ghost", "simple", "nonerdfont", "amongus"
-	preset = "modern", -- NOTE: Overridden!
+	preset = "powerline", -- NOTE: Overridden!
 
-	-- The only way that doesn't mess up Neovide transparency, I think...
+	-- "powerline" preset but with less padding on arrow
 	signs = {
+		arrow = "  ",
+		up_arrow = "",
+		right = " ",
 		left = "",
-		right = "",
-		arrow = "  ",
 	},
 
 	blend = { factor = 0.22 },
+
+	-- Customize highlight groups for colors
+	-- Use Neovim highlight group names or hex colors like "#RRGGBB"
+	hi = {
+		-- NOTE: This is visually for Neovide's normal opacity.
+		background = "Normal", -- Background highlight for diagnostics
+	},
 
 	options = {
 		-- Display the source of diagnostics (e.g., "lua_ls", "pyright")
