@@ -33,7 +33,7 @@ I could've just used `hyperfine` but this _should_ be more accurate.
 ## Lazy-loading
 
 Before attempting to lazy-load any plugins, I had an initial startup time of **~46.5ms**.
-For reference, the startup time of a Neovim with `--clean` (no plugins) was **4.5ms**.
+For reference, the startup time of a Neovim with `--clean` (no plugins) was **~4.5ms**.
 
 In order to set-up lazy-loading with `vim.pack`, I read echasnovski's (creator of `mini.nvim`) guide
 ([here](https://echasnovski.com/blog/2026-03-13-a-guide-to-vim-pack#lazy-loading)) and used the
