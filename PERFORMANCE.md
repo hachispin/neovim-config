@@ -24,9 +24,9 @@ done
 echo $((sum_times / num_iterations))
 ```
 
-This is a _biiit_ hacky. Zsh is used because Bash can't handle floating-points
-and the ugly parsing is to get last line (when Neovim is done starting), remove
-trailing newline, get accumulated time (first field) and remove trailing zeros.
+This is a _biiit_ hacky. Zsh is used because Bash can't handle floating-points and
+the ugly parsing is to get the last line (when Neovim is done starting), remove the
+trailing newline, get the accumulated time (first field) and remove any trailing zeros.
 
 I could've just used `hyperfine` but this _should_ be more accurate.
 
