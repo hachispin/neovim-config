@@ -34,8 +34,8 @@ I could've just used `hyperfine` but this _should_ be more accurate.
 
 Before attempting to lazy-load any plugins:
 
-Initial startup time: ~46.5ms
-For reference, clean: ~4.5ms
+- Initial startup time: ~46.5ms
+- For reference, clean: ~4.5ms
 
 In order to set-up lazy-loading with `vim.pack`, I read echasnovski's (creator of `mini.nvim`) guide
 ([here](https://echasnovski.com/blog/2026-03-13-a-guide-to-vim-pack#lazy-loading)) and used the
@@ -43,7 +43,7 @@ In order to set-up lazy-loading with `vim.pack`, I read echasnovski's (creator o
 
 [This](https://fredrikaverpil.github.io/blog/2026/04/15/from-lazy.nvim-to-vim.pack/) also helped.
 
-Afterwards: ~42.5ms
+- Afterwards: ~42.5ms
 
 Very slight improvement. Maybe I should actually look at what's taking up all the time…
 
@@ -74,12 +74,10 @@ Alright. Time to defer `blink.cmp` to `{"InsertEnter", "CmdLineEnter"}`. As for 
 the _active_ colorscheme will still be eagerly loaded, while everything else will just
 be made lazy. This prevents sudden flashes (especially when using light mode) at startup.
 
-Some other things I did was:
+Some other things I did was switch Everforest to a
+Lua port and delete the ShaDa (shared data) file.
 
-- switch everforest to a Lua port
-- deleted shada (shared data) file
-
-Afterwards: ~34.0ms
+- Afterwards: ~34.0ms
 
 ## Results
 
