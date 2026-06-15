@@ -5,24 +5,8 @@ advice - I'm most definitely more clueless than you are about this.
 
 ## Benchmarking
 
-The way I do benchmarks for startup time is by running this:
-
-```zsh
-#!/usr/bin/env zsh
-
-set -euo pipefail
-
-sum_times=0.0
-num_iterations=25
-
-for ((i = 0; i < num_iterations; i++)); do
-	output=$(nvim --headless --startuptime /dev/stdout +q!)
-	final_time=$(tail -n2 <<<"$output" | tr -d '\n' | cut -d ' ' -f1 | sed 's/^0*//')
-	((sum_times += final_time))
-done
-
-echo $((sum_times / num_iterations))
-```
+The way I've done benchmarks for startup time is by using [this Zsh script
+I made](https://github.com/hachispin/scripts/blob/main/benchmark_nvim.zsh).
 
 This is a _biiit_ hacky. Zsh is used because Bash can't handle floating-points and
 the ugly parsing is to get the last line (when Neovim is done starting), remove the
