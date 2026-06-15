@@ -213,10 +213,8 @@ vim.api.nvim_create_user_command("Cfg", function(opts)
 	local config = vim.fn.stdpath("config")
 	local prefix = config .. "/lua/"
 
-	vim.cmd.cd(config)
-
 	if opts.args == "" then
-		vim.cmd.e("init.lua")
+		vim.cmd.cd(config)
 		return
 	end
 
