@@ -1,22 +1,25 @@
-vim.pack.add({ "https://github.com/stevearc/conform.nvim" })
+-- TODO: Figure out a way to trigger loading on commands (such as :ConformInfo) too.
+lazy_on_event("BufWritePre", function()
+	vim.pack.add({ "https://github.com/stevearc/conform.nvim" })
 
-require("conform").setup({
-	formatters_by_ft = {
-		c = { "clang-format" },
-		cpp = { "clang-format" },
-		javascript = { "prettierd" },
-		lua = { "stylua" },
-		markdown = { "prettierd" },
-		python = { "isort", "ruff_format" },
-		rust = { "rustfmt" },
-		sh = { "shfmt" },
-		toml = { "tombi" },
-	},
-})
+	local conform = require("conform")
+	conform.setup({
+		formatters_by_ft = {
+			["_"] = { "trim_newlines", "trim_whitespace" },
+			c = { "clang-format" },
+			cpp = { "clang-format" },
+			javascript = { "prettierd" },
+			lua = { "stylua" },
+			markdown = { "prettierd" },
+			python = { "isort", "ruff_format" },
+			rust = { "rustfmt" },
+			sh = { "shfmt" },
+			toml = { "tombi" },
+		},
 
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = "*",
-	callback = function(args)
-		require("conform").format({ bufnr = args.buf })
-	end,
-})
+		-- Format asynchronously
+		format_after_save = {
+			lsp_format = "fallback",
+		},
+	})
+end)
