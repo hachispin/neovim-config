@@ -3,6 +3,8 @@
 Documenting some performance tweaks I've done. Don't take this as
 advice - I'm most definitely more clueless than you are about this.
 
+# Startup times
+
 ## Benchmarking
 
 The way I've done benchmarks for startup time is by using [this Zsh script
@@ -13,6 +15,12 @@ the ugly parsing is to get the last line (when Neovim is done starting), remove 
 trailing newline, get the accumulated time (first field) and remove any trailing zeros.
 
 I could've just used `hyperfine` but this _should_ be more accurate.
+
+## `vim.loader.enable()`
+
+This enables an experimental feature that replaces the default module loader. Usage is quite
+easy - just call it as the first line in `init.lua`. The improvement seems to be more significant
+for heavier configurations so this didn't help out _drastically_, but I'll take what I can get.
 
 ## Lazy-loading
 
@@ -46,10 +54,10 @@ That command leads to this output:
 037.275  034.168  000.930: sourcing /home/rain/.config/nvim/init.lua
 ```
 
-So colorschemes are the problem, huh? Everforest by
-itself takes more time to load than clean Neovim…
+So colorschemes seem to be the problem here. Everforest
+by itself takes more time to load than clean Neovim…
 
-∘ ∘ ∘ ( °ヮ° ) ?
+<!-- ∘ ∘ ∘ ( °ヮ° ) ? -->
 
 Alright. Time to defer `blink.cmp` to `{"InsertEnter", "CmdLineEnter"}`. As for colorschemes,
 the _active_ colorscheme will still be eagerly loaded, while everything else will just be made
@@ -66,3 +74,15 @@ That's around a 31% improvement over the initial startup time I had, so
 I'd say this went decently well. Still far from the sub 20ms dream though.
 
 Something tells me this document is far from being done…
+
+## Further changes
+
+I can't be bothered to keep on writing this thoroughly so I'll just
+document whatever else I've done that has improved startup times.
+
+---
+
+Replaced `tiny-inline-diagnostic` with just native `vim.diagnostic.open_float()` calls
+and lazy-loaded `conform` to the `"BufWritePre"` event. Startup time is now **~31.5ms**.
+
+---
