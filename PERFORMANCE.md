@@ -86,3 +86,11 @@ Replaced `tiny-inline-diagnostic` with just native `vim.diagnostic.open_float()`
 and lazy-loaded `conform` to the `"BufWritePre"` event. Startup time is now **~31.5ms**.
 
 ---
+
+Lazy-loaded `dial.nvim` and disabled extensions in `lualine.nvim`. Startup time is now **~30.0ms**.
+
+---
+
+# General performance
+
+TBD

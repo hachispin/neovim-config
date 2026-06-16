@@ -9,7 +9,7 @@ local message_refresh_rate = 2 --seconds
 local message_start = os.time()
 
 require("lualine").setup({
-	extensions = { "quickfix", "fugitive", "mason" },
+	-- extensions = { "quickfix", "fugitive", "mason" },
 	options = {
 		globalstatus = true,
 		always_show_tabline = false,

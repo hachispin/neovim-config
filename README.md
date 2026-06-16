@@ -46,7 +46,6 @@ Includes any plugin installed in [Modules](#modules) except `colorschemes`.
 - `nvim-treesitter`: treesitter is treesitter
 - `rustaceanvim`: sets up rust integrations
 - `tiny-glimmer.nvim`: shows animations on yank, put, undo, redo
-- `tiny-inline-diagnostic.nvim`: makes diagnostics prettier and wrap
 - `todo-comments.nvim`: highlights comments such as `TODO: …`, `FIX: …`, etc.
 - `vim-fugitive`: improves git experience with `:Git` (over `:!git`)
 
