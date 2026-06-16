@@ -11,6 +11,7 @@ vim.g.neovide_text_contrast = 0.5
 vim.g.neovide_scale_factor = 1.0
 --vim.g.neovide_padding_top = 12
 vim.g.neovide_refresh_rate = 120 -- only applies if --no-vsync is passed
+vim.g.neovide_floating_corner_radius = 0.5
 
 -- Cursor settings
 vim.g.neovide_cursor_cell_color_fallback = true
