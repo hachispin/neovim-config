@@ -7,26 +7,27 @@ vim.g.mapleader = " "
 -- General
 vim.o.confirm = true
 vim.o.inccommand = "split"
+vim.o.mouse = "a"
 vim.o.shiftwidth = 4
 vim.o.tabstop = 4
 vim.o.timeoutlen = 300
 vim.o.undofile = true
 vim.o.updatetime = 200
 
--- Visual improvements
+-- Visual adjustments
 require("vim._core.ui2").enable()
 vim.o.cursorline = true
 vim.o.scrolloff = 10
 vim.o.showbreak = "󱞵 "
 vim.o.showmode = false
-vim.o.signcolumn = "yes:1"
-vim.o.winborder = "rounded"
+vim.o.signcolumn = "yes"
+vim.o.winborder = vim.g.neovide and "solid" or "rounded"
 
 -- Line numbers (relative)
 vim.o.number = true
 vim.o.relativenumber = true
 
--- Less annyoing searching
+-- Less annoying searching
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.o.ignorecase = true
 vim.o.smartcase = true
@@ -46,18 +47,15 @@ vim.o.showcmd = true
 vim.o.showcmdloc = "statusline"
 
 vim.diagnostic.config({
-	-- Handled by tiny-inline-diagnostic
 	virtual_lines = false,
 	virtual_text = false,
 
-	-- HACK: Set signs so that tiny-inline-diagnostic can inherit these
-	-- as signs can't be configured per severity in the plugin's config.
 	signs = {
 		text = {
-			[vim.diagnostic.severity.ERROR] = "󰅚 ",
-			[vim.diagnostic.severity.WARN] = "󰀪 ",
-			[vim.diagnostic.severity.INFO] = "󰋽 ",
-			[vim.diagnostic.severity.HINT] = "󰌶 ",
+			[vim.diagnostic.severity.ERROR] = "󰅚",
+			[vim.diagnostic.severity.WARN] = "󰀪",
+			[vim.diagnostic.severity.INFO] = "󰋽",
+			[vim.diagnostic.severity.HINT] = "󰌶",
 		},
 	},
 
@@ -73,12 +71,15 @@ vim.diagnostic.config({
 	},
 })
 
--- HACK: Lobotomize the sign handlers (displayed in the signcolumn) to be replaced
--- with tiny-inline-diagnostic with the multilines + display_count options enabled.
-vim.diagnostic.handlers.signs = {
-	show = function(_, _, _, _) end,
-	hide = function(_, _) end,
-}
+-- Display diagnostic window on hover
+vim.api.nvim_create_autocmd("CursorHold", {
+	callback = function()
+		vim.diagnostic.open_float({
+			focus = false,
+			source = "if_many",
+		})
+	end,
+})
 
 -- I'm lazy
 vim.keymap.set({ "n", "v" }, ";", ":")
