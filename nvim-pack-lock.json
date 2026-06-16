@@ -5,7 +5,7 @@
       "src": "https://github.com/ficd0/ashen.nvim"
     },
     "blink.cmp": {
-      "rev": "8dfcae258106ea7190802029849255714650d3b2",
+      "rev": "91774548bc358c02fcc327d33c9ac0d9830c8c47",
       "src": "https://github.com/saghen/blink.cmp"
     },
     "blink.lib": {
@@ -17,7 +17,7 @@
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "cord.nvim": {
-      "rev": "2e6b16e0363f5a12483734ba96e6326ce2d6741e",
+      "rev": "e6ee37deea7b240d456a59aa7706eec006e56e79",
       "src": "https://github.com/vyfor/cord.nvim"
     },
     "dial.nvim": {
@@ -53,7 +53,7 @@
       "src": "https://github.com/nvim-mini/mini.misc"
     },
     "mini.surround": {
-      "rev": "9fd5ebef2b34cc4ac3c0f1811a6726ea6d92fa91",
+      "rev": "d401c3856585473693e5ce9ec4c8e5b608b4c0fe",
       "src": "https://github.com/nvim-mini/mini.surround"
     },
     "nordic.nvim": {
@@ -73,8 +73,9 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-endwise": {
-      "rev": "8fe8a95630f4f2c72a87ba1927af649e0bfaa244",
-      "src": "https://github.com/RRethy/nvim-treesitter-endwise"
+      "rev": "68313c47f6db3e5cfc76779b92620ae40985620f",
+      "src": "https://github.com/ixti/nvim-treesitter-endwise",
+      "version": "'nvim-0-11-compat'"
     },
     "nvim-web-devicons": {
       "rev": "dfbfaa967a6f7ec50789bead7ef87e336c1fa63c",
@@ -89,16 +90,12 @@
       "src": "https://github.com/olivercederborg/poimandres.nvim"
     },
     "rustaceanvim": {
-      "rev": "4cb26f7f33a0096d9e61756db0d773150466fdf3",
+      "rev": "d2f5271924117588c82bec9086c9807960aafe1e",
       "src": "https://github.com/mrcjkb/rustaceanvim"
     },
     "tiny-glimmer.nvim": {
       "rev": "f26728abf811324d7ed6b035a11d7b76a27c06c3",
       "src": "https://github.com/rachartier/tiny-glimmer.nvim"
-    },
-    "tiny-inline-diagnostic.nvim": {
-      "rev": "e930d0a46031645040d5492595b46cdf6ab3514f",
-      "src": "https://github.com/rachartier/tiny-inline-diagnostic.nvim"
     },
     "todo-comments.nvim": {
       "rev": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668",
