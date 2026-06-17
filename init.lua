@@ -46,17 +46,65 @@ vim.o.cmdheight = 0
 vim.o.showcmd = true
 vim.o.showcmdloc = "statusline"
 
+-- For diagnostics.
+local severity_icons = {
+	[vim.diagnostic.severity.ERROR] = "󰅚",
+	[vim.diagnostic.severity.WARN] = "󰀪",
+	[vim.diagnostic.severity.INFO] = "󰋽",
+	[vim.diagnostic.severity.HINT] = "󰌶",
+}
+
+local severity_hls = {
+	[vim.diagnostic.severity.ERROR] = "DiagnosticError",
+	[vim.diagnostic.severity.WARN] = "DiagnosticWarn",
+	[vim.diagnostic.severity.INFO] = "DiagnosticInfo",
+	[vim.diagnostic.severity.HINT] = "DiagnosticHint",
+}
+
 vim.diagnostic.config({
 	virtual_lines = false,
-	virtual_text = false,
 
-	signs = {
-		text = {
-			[vim.diagnostic.severity.ERROR] = "󰅚",
-			[vim.diagnostic.severity.WARN] = "󰀪",
-			[vim.diagnostic.severity.INFO] = "󰋽",
-			[vim.diagnostic.severity.HINT] = "󰌶",
+	-- TODO: Set up highlights so virtual_text has a background.
+	-- Only show diagnostic sign.
+	virtual_text = {
+		true,
+		current_line = false,
+		spacing = 0,
+
+		format = function(_)
+			return ""
+		end,
+
+		-- I do miss tiny-inline-diagnostic D:
+		prefix = function(d, i, total)
+			local icon = " " .. severity_icons[d.severity]
+
+			if i == total then
+				return icon .. "  " .. total
+			end
+
+			return icon
+		end,
+	},
+
+	severity_sort = true,
+
+	float = {
+		-- Default close events are { 'CursorMoved', 'CursorMovedI', 'InsertCharPre' }.
+		close_events = {
+			"CursorMoved",
+			"CursorMovedI",
+			"InsertEnter",
+			"BufWritePre",
+			"TextChanged",
+			"DiagnosticChanged",
 		},
+		header = "",
+		prefix = function(d)
+			local s = d.severity
+			return severity_icons[s] .. " ", severity_hls[s]
+		end,
+		source = "if_many",
 	},
 
 	-- Auto open the float when jumping with `[d` and `]d`
@@ -64,20 +112,24 @@ vim.diagnostic.config({
 		on_jump = function(_, bufnr)
 			vim.diagnostic.open_float({
 				bufnr = bufnr,
-				scope = "cursor",
 				focus = false,
+				scope = "cursor",
 			})
 		end,
 	},
 })
 
+-- HACK: Lobotomize sign handlers to replace with virtual text. Don't put this
+-- inside that bigger config block above - it won't work there for some reason…
+vim.diagnostic.handlers.signs = {
+	show = function(_, _, _, _) end,
+	hide = function(_, _) end,
+}
+
 -- Display diagnostic window on hover
-vim.api.nvim_create_autocmd("CursorHold", {
+vim.api.nvim_create_autocmd({ "CursorHold", "InsertLeave" }, {
 	callback = function()
-		vim.diagnostic.open_float({
-			focus = false,
-			source = "if_many",
-		})
+		vim.diagnostic.open_float({ focus = false })
 	end,
 })
 
