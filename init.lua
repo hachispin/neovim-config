@@ -17,11 +17,12 @@ vim.o.updatetime = 200
 -- Visual adjustments
 require("vim._core.ui2").enable()
 vim.o.cursorline = true
+vim.o.cursorlineopt = "number"
 vim.o.scrolloff = 10
 vim.o.showbreak = "󱞵 "
 vim.o.showmode = false
 vim.o.signcolumn = "yes"
-vim.o.winborder = vim.g.neovide and "solid" or "rounded"
+vim.o.winborder = vim.g.neovide and "none" or "rounded"
 
 -- Line numbers (relative)
 vim.o.number = true
@@ -48,10 +49,10 @@ vim.o.showcmdloc = "statusline"
 
 -- For diagnostics.
 local severity_icons = {
-	[vim.diagnostic.severity.ERROR] = "󰅚",
-	[vim.diagnostic.severity.WARN] = "󰀪",
-	[vim.diagnostic.severity.INFO] = "󰋽",
-	[vim.diagnostic.severity.HINT] = "󰌶",
+	[vim.diagnostic.severity.ERROR] = "󰅚 ",
+	[vim.diagnostic.severity.WARN] = "󰀪 ",
+	[vim.diagnostic.severity.INFO] = "󰋽 ",
+	[vim.diagnostic.severity.HINT] = "󰌶 ",
 }
 
 local severity_hls = {
@@ -63,31 +64,9 @@ local severity_hls = {
 
 vim.diagnostic.config({
 	virtual_lines = false,
+	virtual_text = false,
 
-	-- TODO: Set up highlights so virtual_text has a background.
-	-- Only show diagnostic sign.
-	virtual_text = {
-		true,
-		current_line = false,
-		spacing = 0,
-
-		format = function(_)
-			return ""
-		end,
-
-		-- I do miss tiny-inline-diagnostic D:
-		prefix = function(d, i, total)
-			local icon = " " .. severity_icons[d.severity]
-
-			if i == total then
-				return icon .. "  " .. total
-			end
-
-			return icon
-		end,
-	},
-
-	severity_sort = true,
+	signs = { text = severity_icons },
 
 	float = {
 		-- Default close events are { 'CursorMoved', 'CursorMovedI', 'InsertCharPre' }.
@@ -102,9 +81,11 @@ vim.diagnostic.config({
 		header = "",
 		prefix = function(d)
 			local s = d.severity
-			return severity_icons[s] .. " ", severity_hls[s]
+			return " " .. severity_icons[s] .. "  ", severity_hls[s]
 		end,
+		anchor_bias = "above",
 		source = "if_many",
+		border = { "", "", "", " ", "", "", "", " " },
 	},
 
 	-- Auto open the float when jumping with `[d` and `]d`
@@ -112,8 +93,8 @@ vim.diagnostic.config({
 		on_jump = function(_, bufnr)
 			vim.diagnostic.open_float({
 				bufnr = bufnr,
-				focus = false,
 				scope = "cursor",
+				focus = false,
 			})
 		end,
 	},
@@ -125,13 +106,6 @@ vim.diagnostic.handlers.signs = {
 	show = function(_, _, _, _) end,
 	hide = function(_, _) end,
 }
-
--- Display diagnostic window on hover
-vim.api.nvim_create_autocmd({ "CursorHold", "InsertLeave" }, {
-	callback = function()
-		vim.diagnostic.open_float({ focus = false })
-	end,
-})
 
 -- I'm lazy
 vim.keymap.set({ "n", "v" }, ";", ":")

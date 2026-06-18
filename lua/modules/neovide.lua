@@ -44,53 +44,18 @@ vim.keymap.set("n", "<C-->", function()
 end)
 
 -- Transparency controls
---
--- normal_opacity is used instead of opacity because some
--- glyphs don't render well (e.g., powerline dividers).
---
--- All this complexity is mainly from CursorLine being
--- fully opaque when setting normal_opacity. I have to sync
--- it with normal_opacity so it doesn't look disgusting.
-
-local function sync_opacity_cursorline()
-	local blend = math.floor((1 - vim.g.neovide_normal_opacity) * 100)
-	local hl = vim.api.nvim_get_hl(0, { name = "CursorLine", link = false })
-	vim.api.nvim_set_hl(0, "CursorLine", vim.tbl_extend("force", hl, { blend = blend }))
-end
-
-local function add_opacity(interval)
-	if interval == 0 then
-		return
-	end
-
-	local new_opacity = vim.g.neovide_normal_opacity + interval
-
-	if interval > 0 then
-		vim.g.neovide_normal_opacity = math.min(1.0, new_opacity)
-	else
-		vim.g.neovide_normal_opacity = math.max(0.5, new_opacity)
-	end
-
-	sync_opacity_cursorline()
-end
-
-vim.api.nvim_create_autocmd("ColorScheme", {
-	callback = function()
-		sync_opacity_cursorline()
-	end,
-})
 
 vim.g.neovide_normal_opacity = 1.0
 local interval = 0.05
 
 vim.keymap.set("n", "<leader>t=", function()
-	add_opacity(interval)
+	vim.g.neovide_normal_opacity = vim.g.neovide_normal_opacity + interval
 end)
 
 vim.keymap.set("n", "<leader>t0", function()
-	add_opacity(1.0)
+	vim.g.neovide_normal_opacity = 1.0
 end)
 
 vim.keymap.set("n", "<leader>t-", function()
-	add_opacity(-interval)
+	vim.g.neovide_normal_opacity = vim.g.neovide_normal_opacity - interval
 end)
