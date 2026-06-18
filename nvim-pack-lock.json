@@ -32,6 +32,10 @@
       "rev": "2038c666bd9d8a0b7349a0b6ee00dc83104b9ecf",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
+    "gruber-darker.nvim": {
+      "rev": "aba065c3a79b58cc3863d5c9db319255abd1258a",
+      "src": "https://github.com/blazkowolf/gruber-darker.nvim"
+    },
     "lualine.nvim": {
       "rev": "221ce6b2d999187044529f49da6554a92f740a96",
       "src": "https://github.com/nvim-lualine/lualine.nvim"
@@ -84,10 +88,6 @@
     "palenight.nvim": {
       "rev": "97df63f5a903ea4a21f712d284b138ba0ee3f615",
       "src": "https://github.com/alexmozaidze/palenight.nvim"
-    },
-    "poimandres.nvim": {
-      "rev": "a488957d803943a4201ac3b774913fcafa9e6b3a",
-      "src": "https://github.com/olivercederborg/poimandres.nvim"
     },
     "rustaceanvim": {
       "rev": "d216efd4e24c67224355d19c2fc642561c32f6cf",
