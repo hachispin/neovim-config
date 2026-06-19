@@ -63,9 +63,9 @@ local severity_hls = {
 }
 
 vim.diagnostic.config({
+	-- tiny-inline-diagnostic
 	virtual_lines = false,
 	virtual_text = false,
-
 	signs = { text = severity_icons },
 
 	float = {
@@ -81,7 +81,7 @@ vim.diagnostic.config({
 		header = "",
 		prefix = function(d)
 			local s = d.severity
-			return " " .. severity_icons[s] .. "  ", severity_hls[s]
+			return severity_icons[s] .. " ", severity_hls[s]
 		end,
 		anchor_bias = "above",
 		source = "if_many",

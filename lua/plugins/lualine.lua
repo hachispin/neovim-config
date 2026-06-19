@@ -8,6 +8,17 @@ local current_message = messages[math.random(#messages)]
 local message_refresh_rate = 2 --seconds
 local message_start = os.time()
 
+-- Make lualine use diagnostic config signs.
+local signs = vim.diagnostic.config().signs.text
+
+---@cast signs -nil
+local symbols = {
+	error = signs[vim.diagnostic.severity.ERROR],
+	warn = signs[vim.diagnostic.severity.WARN],
+	info = signs[vim.diagnostic.severity.INFO],
+	hint = signs[vim.diagnostic.severity.HINT],
+}
+
 require("lualine").setup({
 	-- extensions = { "quickfix", "fugitive", "mason" },
 	options = {
@@ -15,6 +26,10 @@ require("lualine").setup({
 		always_show_tabline = false,
 	},
 	sections = {
+		lualine_b = { "branch", "diff", {
+			"diagnostics",
+			symbols = symbols,
+		} },
 		lualine_x = {
 			{ "%S", separator = "" },
 			{

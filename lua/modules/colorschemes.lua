@@ -22,4 +22,13 @@ vim.pack.add({
 	"https://github.com/blazkowolf/gruber-darker.nvim", -- gruber-darker
 })
 
+-- Put colorscheme autocmds here.
+if vim.g.neovide then
+	vim.api.nvim_create_autocmd("ColorScheme", {
+		callback = function(_)
+			vim.api.nvim_set_hl(0, "FloatBorder", { link = "NormalFloat" })
+		end,
+	})
+end
+
 vim.cmd.colorscheme("gruber-darker")
