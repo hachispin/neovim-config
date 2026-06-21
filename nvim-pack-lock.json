@@ -90,7 +90,7 @@
       "src": "https://github.com/alexmozaidze/palenight.nvim"
     },
     "rustaceanvim": {
-      "rev": "1cbbab3a8959bbc1cd136cb1670b75c172073fce",
+      "rev": "ab9e47018218f3e41a46c76d7790b6d161f00750",
       "src": "https://github.com/mrcjkb/rustaceanvim"
     },
     "tiny-glimmer.nvim": {

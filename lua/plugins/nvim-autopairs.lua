@@ -11,14 +11,18 @@ lazy_on_event("InsertEnter", function()
 			return opts.line:sub(opts.col - 1, opts.col) == "[]"
 		end):with_move(cond.done()),
 
-		Rule("<", ">"):with_pair(
+		Rule("<", ">", { "rust", "java", "cs" }):with_pair(
 			-- regex will make it so that it will auto-pair on
 			-- `a<` but not `a <`
 			-- The `:?:?` part makes it also
 			-- work on Rust generics like `some_func::<T>()`
 			cond.before_regex("%a+:?:?$", 3)
-		):with_move(function(opts)
-			return opts.char == ">"
-		end),
+		):with_move(cond.done()),
+
+		Rule("<", ">", { "cpp" })
+			:with_pair(cond.before_regex("%a+:?:?$", 3) or cond.before_text("#include"))
+			:with_move(cond.done()),
+
+		Rule("<", ">", { "c" }):with_pair(cond.before_text("#include ")):with_move(cond.done()),
 	})
 end)
