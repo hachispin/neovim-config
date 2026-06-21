@@ -111,6 +111,9 @@ vim.diagnostic.handlers.signs = {
 vim.keymap.set({ "n", "v" }, ";", ":")
 vim.keymap.set({ "n", "v" }, ":", ":!")
 
+-- Escape terminal mode
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>")
+
 -- LSP keymaps
 vim.keymap.set("n", "<leader>r", function()
 	-- NOTE: Must run :wa afterwards
