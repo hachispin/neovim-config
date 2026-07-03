@@ -80,6 +80,15 @@ local opts = {
 }
 
 lazy_later(function()
-	vim.pack.add({ "https://github.com/rachartier/tiny-inline-diagnostic.nvim" })
+	-- TODO: Unpin this once an option is added to remove virtual line usage
+	-- (the thing that pushes lines down and is quite disruptive… and was
+	-- the reason I even used this plugin over native Neovim diagnostics).
+	vim.pack.add({
+		{
+			src = "https://github.com/rachartier/tiny-inline-diagnostic.nvim",
+			version = "e930d0a46031645040d5492595b46cdf6ab3514f",
+		},
+	})
+
 	require("tiny-inline-diagnostic").setup(opts)
 end)
