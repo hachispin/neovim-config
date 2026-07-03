@@ -7,7 +7,7 @@ local opts = {
 	signs = {
 		arrow = "  ",
 		up_arrow = "",
-		right = " ",
+		right = "",
 		left = "",
 	},
 
@@ -19,7 +19,6 @@ local opts = {
 		-- NOTE: This is visually for Neovide's normal opacity.
 		background = "Normal", -- Background highlight for diagnostics
 	},
-
 	options = {
 		-- Display the diagnostic code of diagnostics (e.g., "F401", "no-dupe-args")
 		show_code = false,
@@ -64,8 +63,15 @@ local opts = {
 		-- function(diag)
 		--     return diag.message .. " [" .. diag.source .. "]"
 		-- end
-		format = function(diag) -- Trim to one line
-			return diag.message:match("^[^\r\n]+") or diag.message
+		format = function(diag) -- Trim to "summary"
+			local regex = "^[^\r\n]+"
+
+			-- Add more stuff here
+			if #vim.lsp.get_clients({ bufnr = 0, name = "clangd" }) > 0 then
+				regex = regex .. ";"
+			end
+
+			return diag.message:match(regex) or diag.message
 		end,
 
 		-- Automatically disable diagnostics when opening diagnostic float windows

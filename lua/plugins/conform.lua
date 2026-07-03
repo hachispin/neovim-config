@@ -9,6 +9,7 @@ lazy_on_event("BufWritePre", function()
 			c = { "clang-format" },
 			cpp = { "clang-format" },
 			javascript = { "prettierd" },
+			json = { "prettierd" },
 			lua = { "stylua" },
 			markdown = { "prettierd" },
 			python = { "isort", "ruff_format" },

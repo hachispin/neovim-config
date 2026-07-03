@@ -5,7 +5,7 @@
       "src": "https://github.com/ficd0/ashen.nvim"
     },
     "blink.cmp": {
-      "rev": "bda905a4bf1b3edfa708b0be193b8c63d8620c96",
+      "rev": "9dcb1f3a9164f10c8950a790aace576f2e89dc78",
       "src": "https://github.com/saghen/blink.cmp"
     },
     "blink.lib": {
@@ -17,7 +17,7 @@
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "cord.nvim": {
-      "rev": "e6ee37deea7b240d456a59aa7706eec006e56e79",
+      "rev": "b08b9245d2973eda91437d2de5c8746b9f510d31",
       "src": "https://github.com/vyfor/cord.nvim"
     },
     "dial.nvim": {
@@ -29,7 +29,7 @@
       "src": "https://github.com/neanias/everforest-nvim"
     },
     "gitsigns.nvim": {
-      "rev": "2038c666bd9d8a0b7349a0b6ee00dc83104b9ecf",
+      "rev": "eb60cc7b94c46005237fd34170d76f3a089a90aa",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "gruber-darker.nvim": {
@@ -57,7 +57,7 @@
       "src": "https://github.com/nvim-mini/mini.misc"
     },
     "mini.surround": {
-      "rev": "580e4cb98c5900d9fe743865fb5a5b2178b4ab18",
+      "rev": "a2f644f3759edd3d3f8b6a6d55378408bfe6d290",
       "src": "https://github.com/nvim-mini/mini.surround"
     },
     "nordic.nvim": {
@@ -69,7 +69,7 @@
       "src": "https://github.com/windwp/nvim-autopairs"
     },
     "nvim-lspconfig": {
-      "rev": "bfcc0171a43f22afa61d927ffe9fcb6cb85dc99e",
+      "rev": "292f44408498103c47996ff5c18fd366293840d8",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
@@ -82,7 +82,7 @@
       "version": "'nvim-0-11-compat'"
     },
     "nvim-web-devicons": {
-      "rev": "dfbfaa967a6f7ec50789bead7ef87e336c1fa63c",
+      "rev": "dad71387de386a946b123079d0e53f23028f3abd",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
     "palenight.nvim": {
@@ -90,7 +90,7 @@
       "src": "https://github.com/alexmozaidze/palenight.nvim"
     },
     "rustaceanvim": {
-      "rev": "ab9e47018218f3e41a46c76d7790b6d161f00750",
+      "rev": "24958d97c0e2393339e59404ebe7ee687951ea24",
       "src": "https://github.com/mrcjkb/rustaceanvim"
     },
     "tiny-glimmer.nvim": {
