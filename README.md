@@ -54,7 +54,7 @@ Includes any plugin installed in [Modules](#modules) except `colorschemes`.
 
 # Showcase
 
-Neovide, 20% transparency, [Melange theme](https://github.com/savq/melange-nvim), a
-custom Iosevka build and [this wallpaper](https://danbooru.donmai.us/posts/10183325).
+Neovide, 20% transparency, [Nordic theme](https://github.com/AlexvZyl/nordic.nvim), a
+custom Iosevka build and [this wallpaper](https://www.pixiv.net/en/artworks/130694965).
 
-![A screenshot of some Rust code with this config](./showcase.png)
+![A screenshot of some C code with this config](./showcase.png)

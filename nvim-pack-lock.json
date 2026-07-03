@@ -99,7 +99,8 @@
     },
     "tiny-inline-diagnostic.nvim": {
       "rev": "e930d0a46031645040d5492595b46cdf6ab3514f",
-      "src": "https://github.com/rachartier/tiny-inline-diagnostic.nvim"
+      "src": "https://github.com/rachartier/tiny-inline-diagnostic.nvim",
+      "version": "'e930d0a46031645040d5492595b46cdf6ab3514f'"
     },
     "todo-comments.nvim": {
       "rev": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668",
