@@ -64,13 +64,14 @@ local opts = {
 		--     return diag.message .. " [" .. diag.source .. "]"
 		-- end
 		format = function(diag) -- Trim to "summary"
-			local regex = "^[^\r\n]+"
+			local stop = "\r\n"
 
 			-- Add more stuff here
-			if #vim.lsp.get_clients({ bufnr = 0, name = "clangd" }) > 0 then
-				regex = regex .. ";"
+			if #vim.lsp.get_clients({ bufnr = 0, name = "clangd" }) > 0 and diag.code ~= "expected_semi_after_expr" then
+				stop = stop .. ";"
 			end
 
+			local regex = "^[^" .. stop .. "]+"
 			return diag.message:match(regex) or diag.message
 		end,
 
