@@ -5,8 +5,8 @@ end
 -- Font settings
 --
 -- Most font settings are in :NeovideConfig
-vim.g.neovide_text_gamma = 0.8
-vim.g.neovide_text_contrast = 0.5
+-- vim.g.neovide_text_gamma = 0.8
+-- vim.g.neovide_text_contrast = 0.5
 
 -- Window settings
 vim.g.neovide_scale_factor = 1.0
@@ -40,7 +40,7 @@ vim.g.neovide_normal_opacity = 1.0
 local interval = 0.05
 
 vim.keymap.set("n", "<leader>t=", function()
-	vim.g.neovide_normal_opacity = vim.g.neovide_normal_opacity + interval
+	vim.g.neovide_normal_opacity = math.min(1.0, vim.g.neovide_normal_opacity + interval)
 end)
 
 vim.keymap.set("n", "<leader>t0", function()
@@ -48,5 +48,5 @@ vim.keymap.set("n", "<leader>t0", function()
 end)
 
 vim.keymap.set("n", "<leader>t-", function()
-	vim.g.neovide_normal_opacity = vim.g.neovide_normal_opacity - interval
+	vim.g.neovide_normal_opacity = math.max(0.5, vim.g.neovide_normal_opacity - interval)
 end)

@@ -3,7 +3,7 @@ family = "Iosevka Rain"
 spacing = "normal"
 serifs = "sans"
 noCvSs = true
-exportGlyphNames = false
+exportGlyphNames = true  # for kitty
 buildTextureFeature = true
 
 [buildPlans.IosevkaRain.variants.design]
@@ -16,6 +16,9 @@ zero = "tall-slashed"
 f = "serifed"
 g = "double-storey"
 y = "cursive-serifless"
+tittle = "square"
+diacritic-dot = "square"
+punctuation-dot = "square"
 braille-dot = "square"
 asterisk = "hex-high"
 paren = "flat-arc"

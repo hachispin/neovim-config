@@ -72,7 +72,11 @@ local opts = {
 			end
 
 			local regex = "^[^" .. stop .. "]+"
-			return diag.message:match(regex) or diag.message
+			local match = diag.message:match(regex)
+			match = match:sub(1, 1):upper() .. match:sub(2)
+			match = match:gsub("%.%.%.", "…")
+
+			return match
 		end,
 
 		-- Automatically disable diagnostics when opening diagnostic float windows
@@ -81,15 +85,6 @@ local opts = {
 }
 
 lazy_later(function()
-	-- TODO: Unpin this once an option is added to remove virtual line usage
-	-- (the thing that pushes lines down and is quite disruptive… and was
-	-- the reason I even used this plugin over native Neovim diagnostics).
-	vim.pack.add({
-		{
-			src = "https://github.com/rachartier/tiny-inline-diagnostic.nvim",
-			version = "e930d0a46031645040d5492595b46cdf6ab3514f",
-		},
-	})
-
+	vim.pack.add({ "https://github.com/rachartier/tiny-inline-diagnostic.nvim" })
 	require("tiny-inline-diagnostic").setup(opts)
 end)
