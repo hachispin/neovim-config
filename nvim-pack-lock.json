@@ -73,7 +73,7 @@
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
-      "rev": "a45a920ec04cda5624f6dea0ff6454c81c3ad2d5",
+      "rev": "0153df68b44fa97a3e11696ca55cbdd7a6d42398",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-endwise": {
@@ -90,7 +90,7 @@
       "src": "https://github.com/alexmozaidze/palenight.nvim"
     },
     "rustaceanvim": {
-      "rev": "746d84daa3678397e7b9595b86db30b3e7af7c28",
+      "rev": "20415b619f40af0bcdb12705c6328382ca34c299",
       "src": "https://github.com/mrcjkb/rustaceanvim"
     },
     "scrollEOF.nvim": {

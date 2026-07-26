@@ -159,28 +159,6 @@ vim.keymap.set({ "n", "v" }, "<leader>d", '"+d')
 vim.keymap.set("n", "<leader>dd", '"+dd')
 vim.keymap.set("n", "<leader>D", '"+D')
 
--- WARN: This may cause some issues if cols < scrolloff * 2
--- while writing on the last line with some terminals.
---
--- Make scrolloff behave as you'd expect when approaching
--- EOF. This should be replaced with scrolloffpad if it
--- ever receives the options to replicate this behaviour.
---
--- vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI", "BufEnter" }, {
--- 	group = vim.api.nvim_create_augroup("ScrollOffEOF", {}),
--- 	callback = function()
--- 		local win_h = vim.api.nvim_win_get_height(0)
--- 		local off = math.min(vim.o.scrolloff, math.floor(win_h / 2))
--- 		local dist = vim.fn.line("$") - vim.fn.line(".")
--- 		local rem = vim.fn.line("w$") - vim.fn.line("w0") + 1
--- 		if dist < off and win_h - rem + dist < off then
--- 			local view = vim.fn.winsaveview()
--- 			view.topline = view.topline + off - (win_h - rem + dist)
--- 			vim.fn.winrestview(view)
--- 		end
--- 	end,
--- })
-
 -- Restore old cursor position when opening buffers
 vim.api.nvim_create_autocmd("BufRead", {
 	callback = function(opts)

@@ -17,12 +17,18 @@ lazy_on_event("InsertEnter", function()
 			-- The `:?:?` part makes it also
 			-- work on Rust generics like `some_func::<T>()`
 			cond.before_regex("%a+:?:?$", 3)
-		):with_move(cond.done()),
+		):with_move(function(opts)
+			return opts.char == ">"
+		end),
 
 		Rule("<", ">", { "cpp" })
 			:with_pair(cond.before_regex("%a+:?:?$", 3) or cond.before_text("#include"))
-			:with_move(cond.done()),
+			:with_move(function(opts)
+				return opts.char == ">"
+			end),
 
-		Rule("<", ">", { "c" }):with_pair(cond.before_text("#include ")):with_move(cond.done()),
+		Rule("<", ">", { "c" }):with_pair(cond.before_text("#include ")):with_move(function(opts)
+			return opts.char == ">"
+		end),
 	})
 end)
