@@ -234,7 +234,9 @@ vim.api.nvim_create_user_command("Cfg", function(opts)
 		end
 
 		local relpath = choice_to_path[choice] .. ".lua"
-		vim.cmd.e(prefix .. relpath)
+		local path = vim.fs.normalize(prefix .. relpath)
+
+		vim.cmd.e(path)
 	end
 end, {
 	nargs = "*",
