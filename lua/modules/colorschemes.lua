@@ -3,8 +3,8 @@ lazy_later(function()
 		"https://github.com/alexmozaidze/palenight.nvim", -- palenight
 		"https://github.com/alexvzyl/nordic.nvim", -- nordic
 		"https://github.com/arnauKL/south.nvim", -- south
+		"https://github.com/blazkowolf/gruber-darker.nvim", -- gruber-darker
 		"https://github.com/ficd0/ashen.nvim", -- ashen
-		"https://github.com/neanias/everforest-nvim", -- everforest
 		"https://github.com/savq/melange-nvim", -- melange
 	})
 
@@ -20,7 +20,7 @@ lazy_later(function()
 end)
 
 vim.pack.add({
-	"https://github.com/blazkowolf/gruber-darker.nvim", -- gruber-darker
+	"https://github.com/neanias/everforest-nvim", -- everforest
 })
 
 -- Put colorscheme autocmds here.
@@ -32,4 +32,4 @@ if vim.g.neovide then
 	})
 end
 
-vim.cmd.colorscheme("gruber-darker")
+vim.cmd.colorscheme("everforest")

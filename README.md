@@ -45,12 +45,11 @@ Includes any plugin installed in [Modules](#modules) except `colorschemes`.
 - `nvim-treesitter-endwise`: pairs that trigger on \<CR\>, e.g., for `if` statements
 - `nvim-treesitter`: treesitter is treesitter
 - `rustaceanvim`: sets up rust integrations
+- `scrollEOF.nvim`: pads buffer so scrolloff stays consistent near EOF
 - `tiny-glimmer.nvim`: shows animations on yank, put, undo, redo
+- `tiny-inline-diagnostic.nvim`: diagnostic virtual text, but prettier
 - `todo-comments.nvim`: highlights comments such as `TODO: …`, `FIX: …`, etc.
 - `vim-fugitive`: improves git experience with `:Git` (over `:!git`)
-
-<!-- NOTE(for-my-sanity): Don't try replacing nvim-treesitter-endwise with
-     nvim-autopairs' endwise rules. You WILL go insane. Trust me. X_X -->
 
 # Showcase
 
