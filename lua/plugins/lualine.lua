@@ -31,7 +31,19 @@ require("lualine").setup({
 			symbols = symbols,
 		} },
 		lualine_x = {
-			{ "%S", separator = "" },
+			{
+				"%S",
+				separator = "",
+				fmt = function(msg)
+					local reg = vim.fn.reg_recording()
+
+					if reg ~= "" then
+						msg = msg .. " [@" .. reg .. "]"
+					end
+
+					return msg
+				end,
+			},
 			{
 				"encoding",
 				fmt = function(msg)
