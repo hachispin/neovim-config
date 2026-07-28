@@ -1,27 +1,28 @@
-lazy_later(function()
-	vim.pack.add({
-		"https://github.com/alexmozaidze/palenight.nvim", -- palenight
-		"https://github.com/alexvzyl/nordic.nvim", -- nordic
-		"https://github.com/arnauKL/south.nvim", -- south
-		"https://github.com/blazkowolf/gruber-darker.nvim", -- gruber-darker
-		"https://github.com/ficd0/ashen.nvim", -- ashen
-		"https://github.com/savq/melange-nvim", -- melange
-	})
+-- themes maybe
+--[[ 
+	"https://github.com/alexmozaidze/palenight.nvim", -- palenight { italic = true }
+	"https://github.com/alexvzyl/nordic.nvim", -- nordic
+	"https://github.com/arnauKL/south.nvim", -- south
+	"https://github.com/blazkowolf/gruber-darker.nvim", -- gruber-darker
+	"https://github.com/ficd0/ashen.nvim", -- ashen
+	"https://github.com/savq/melange-nvim", -- melange
+	"https://github.com/neanias/everforest-nvim", -- everforest { italics = true, ui_contrast = "high" }
+--]]
 
-	require("everforest").setup({
-		---Whether italics should be used for keywords and more.
-		italics = true,
-		---The contrast of line numbers, indent lines, etc. Options are `"high"` or
-		---`"low"` (default).
-		ui_contrast = "high",
-	})
+local theme_src = ""
+local theme = ""
+local opts = {}
 
-	require("palenight").setup({ italic = true })
-end)
+if vim.g.background == "light" then
+	theme_src = "https://github.com/neanias/everforest-nvim"
+	theme = "everforest"
+	opts = { italics = true, ui_contrast = "high" }
+else
+	theme_src = "https://github.com/blazkowolf/gruber-darker.nvim"
+	theme = "gruber-darker"
+end
 
-vim.pack.add({
-	"https://github.com/neanias/everforest-nvim", -- everforest
-})
+vim.pack.add({ theme_src })
 
 -- Put colorscheme autocmds here.
 if vim.g.neovide then
@@ -32,4 +33,5 @@ if vim.g.neovide then
 	})
 end
 
-vim.cmd.colorscheme("everforest")
+require(theme).setup(opts)
+vim.cmd.colorscheme(theme)
