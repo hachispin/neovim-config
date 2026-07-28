@@ -1,15 +1,11 @@
 {
   "plugins": {
-    "ashen.nvim": {
-      "rev": "bfb04bd50b69d863469b2deb9fb361cf0d945ba7",
-      "src": "https://github.com/ficd0/ashen.nvim"
-    },
     "blink.cmp": {
-      "rev": "1e4a8fb9708bbaa35addaa198638feed622d56ae",
+      "rev": "dbcf63b90b358f058637ea370202e3849013383b",
       "src": "https://github.com/saghen/blink.cmp"
     },
     "blink.lib": {
-      "rev": "5876dd95deeb70aadbe9f1c0b7117a135061cdac",
+      "rev": "2789206e10a0e4880f808c2aaf52bc57d876b481",
       "src": "https://github.com/saghen/blink.lib"
     },
     "conform.nvim": {
@@ -48,10 +44,6 @@
       "rev": "2a6940af80375532e5e9e7c1f2fc6319a1b7a69d",
       "src": "https://github.com/mason-org/mason.nvim"
     },
-    "melange-nvim": {
-      "rev": "ce42f6b629beeaa00591ba73a77d3eeac4cf28ce",
-      "src": "https://github.com/savq/melange-nvim"
-    },
     "mini.misc": {
       "rev": "29e2b6838b3f1399d5062f6d735ebc79eb8765f4",
       "src": "https://github.com/nvim-mini/mini.misc"
@@ -59,10 +51,6 @@
     "mini.surround": {
       "rev": "8d5d0c5aa92449368ac251e85451d79d8f69d296",
       "src": "https://github.com/nvim-mini/mini.surround"
-    },
-    "nordic.nvim": {
-      "rev": "9fb62116b891184049c50ca6ffb0d3bc100a1a6e",
-      "src": "https://github.com/alexvzyl/nordic.nvim"
     },
     "nvim-autopairs": {
       "rev": "7b9923abad60b903ece7c52940e1321d39eccc79",
@@ -85,21 +73,13 @@
       "rev": "2ae6958df7ced50baac5035cec0c15799eedfbf7",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
-    "palenight.nvim": {
-      "rev": "97df63f5a903ea4a21f712d284b138ba0ee3f615",
-      "src": "https://github.com/alexmozaidze/palenight.nvim"
-    },
     "rustaceanvim": {
-      "rev": "4601b060f587cbdee14b25da3a1e34a3ce5b02ed",
+      "rev": "ae030cf5f8ab6aea56e03fa7e55b063111c0b833",
       "src": "https://github.com/mrcjkb/rustaceanvim"
     },
     "scrollEOF.nvim": {
       "rev": "e462b9a07b8166c3e8011f1dcbc6bf68b67cd8d7",
       "src": "https://github.com/Aasim-A/scrollEOF.nvim"
-    },
-    "south.nvim": {
-      "rev": "605c7efede69435ebebc2b45e5f131df1e158b4b",
-      "src": "https://github.com/arnauKL/south.nvim"
     },
     "tiny-glimmer.nvim": {
       "rev": "f26728abf811324d7ed6b035a11d7b76a27c06c3",
