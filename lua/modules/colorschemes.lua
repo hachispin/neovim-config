@@ -13,7 +13,7 @@ local theme_src = ""
 local theme = ""
 local opts = {}
 
-if vim.g.background == "light" then
+if vim.o.background == "light" then
 	theme_src = "https://github.com/neanias/everforest-nvim"
 	theme = "everforest"
 	opts = { italics = true, ui_contrast = "high" }
