@@ -20,6 +20,7 @@ vim.o.scrolloff = 10
 vim.o.showbreak = "󱞵 "
 vim.o.showmode = false
 vim.o.signcolumn = "yes"
+vim.o.tabstop = 4
 vim.o.winborder = vim.g.neovide and "none" or "rounded"
 
 -- Line numbers (relative)
