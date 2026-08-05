@@ -17,16 +17,15 @@ require("mason-tool-installer").setup({
 	ensure_installed = {
 		"basedpyright",
 		"bash-language-server",
+		"biome",
 		"clang-format",
 		"clangd",
 		"csharp-language-server",
 		"csharpier",
-		"isort",
 		"lua-language-server",
 		"prettierd",
 		"roslyn",
 		"ruff",
-		-- "rust-analyzer", (handled by rustaceanvim)
 		"shellcheck",
 		"shfmt",
 		"stylua",
