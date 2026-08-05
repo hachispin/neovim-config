@@ -1,6 +1,6 @@
 [buildPlans.IosevkaRain]
 family = "Iosevka Rain"
-spacing = "normal"
+spacing = "term"
 serifs = "sans"
 noCvSs = true
 exportGlyphNames = true  # for kitty
