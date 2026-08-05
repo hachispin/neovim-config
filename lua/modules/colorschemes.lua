@@ -33,5 +33,8 @@ if vim.g.neovide then
 	})
 end
 
-require(theme).setup(opts)
+if next(opts) ~= nil then
+	require(theme).setup(opts)
+end
+
 vim.cmd.colorscheme(theme)
