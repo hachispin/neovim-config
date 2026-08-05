@@ -1,4 +1,3 @@
--- Enable faster startup by caching compiled Lua modules
 vim.loader.enable()
 
 -- Leader key
@@ -244,4 +243,6 @@ end, {
 	end,
 })
 
--- Colorscheme is set in modules/colorschemes.lua
+-- Colorscheme!
+vim.pack.add({ "https://github.com/mellow-theme/mellow.nvim" })
+vim.cmd.colorscheme("mellow")

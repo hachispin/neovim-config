@@ -50,3 +50,11 @@ end)
 vim.keymap.set("n", "<leader>t-", function()
 	vim.g.neovide_normal_opacity = math.max(0.5, vim.g.neovide_normal_opacity - interval)
 end)
+
+-- Meh.
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+	callback = function(_)
+		vim.api.nvim_set_hl(0, "FloatBorder", { link = "NormalFloat" })
+	end,
+})
