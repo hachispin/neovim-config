@@ -245,4 +245,18 @@ end, {
 
 -- Colorscheme!
 vim.pack.add({ "https://github.com/mellow-theme/mellow.nvim" })
+
+local mellow_config = require("mellow.config").config
+mellow_config.variant = vim.o.background
+
 vim.cmd.colorscheme("mellow")
+
+-- Should probably open a PR for this. Colorschemes
+-- usually set variant by background anyway. Oh well.
+vim.api.nvim_create_autocmd("OptionSet", {
+	pattern = "background",
+	callback = function()
+		mellow_config.variant = vim.o.background
+		vim.cmd.colorscheme("mellow")
+	end,
+})
