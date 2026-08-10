@@ -13,6 +13,7 @@ vim.o.updatetime = 200
 
 -- Visual adjustments
 require("vim._core.ui2").enable()
+vim.o.colorcolumn = "100"
 vim.o.cursorline = true
 vim.o.cursorlineopt = "number"
 vim.o.scrolloff = 10
@@ -244,19 +245,5 @@ end, {
 })
 
 -- Colorscheme!
-vim.pack.add({ "https://github.com/mellow-theme/mellow.nvim" })
-
-local mellow_config = require("mellow.config").config
-mellow_config.variant = vim.o.background
-
-vim.cmd.colorscheme("mellow")
-
--- Should probably open a PR for this. Colorschemes
--- usually set variant by background anyway. Oh well.
-vim.api.nvim_create_autocmd("OptionSet", {
-	pattern = "background",
-	callback = function()
-		mellow_config.variant = vim.o.background
-		vim.cmd.colorscheme("mellow")
-	end,
-})
+vim.pack.add({ "https://github.com/savq/melange-nvim" })
+vim.cmd.colorscheme("melange")
