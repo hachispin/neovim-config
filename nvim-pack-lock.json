@@ -1,7 +1,7 @@
 {
   "plugins": {
     "blink.cmp": {
-      "rev": "8ca29c2eb34f5ce4770bffc0d62e6f636a4e8526",
+      "rev": "e116ff9c5c1c2ed6bcdb2e0a6e547099876a8116",
       "src": "https://github.com/saghen/blink.cmp"
     },
     "blink.lib": {
@@ -9,11 +9,11 @@
       "src": "https://github.com/saghen/blink.lib"
     },
     "conform.nvim": {
-      "rev": "619363c30309d29ffa631e67c8183f2a72caa373",
+      "rev": "016802de402556da54c36bd7359b441266b01cdd",
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "cord.nvim": {
-      "rev": "ffd5450592c6d069ce941b73bbeb3fdf114a3e91",
+      "rev": "012dcf6d0507e1525a682b46d6de2188fd68980c",
       "src": "https://github.com/vyfor/cord.nvim"
     },
     "dial.nvim": {
@@ -21,7 +21,7 @@
       "src": "https://github.com/monaqa/dial.nvim"
     },
     "gitsigns.nvim": {
-      "rev": "31d6fb2d618bca1482b9f274751ead5f03461408",
+      "rev": "5be654f2232c10ddcad19c1607a67b6b4b78fc29",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "guess-indent.nvim": {
@@ -57,11 +57,11 @@
       "src": "https://github.com/windwp/nvim-autopairs"
     },
     "nvim-lspconfig": {
-      "rev": "43ed3797b266e1ee8d222e491379ad471c9d3146",
+      "rev": "51dbf5359da86721662c87ca10eb73add973737b",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
-      "rev": "c9f9ed6c1892f629ea399f4ee7905f2686fa13f2",
+      "rev": "074aa4422bf029908338e855d0c0f71470a971bb",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-endwise": {
@@ -74,7 +74,7 @@
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
     "rustaceanvim": {
-      "rev": "dc71383c3bb17d18bae021a35253ae0d271048a9",
+      "rev": "5ceae75d8141290c03e119b4c4ce785574a0325b",
       "src": "https://github.com/mrcjkb/rustaceanvim"
     },
     "scrollEOF.nvim": {
