@@ -16,7 +16,7 @@ zero = "tall-slashed"
 f = "serifed"
 g = "double-storey"
 r = "serifed"
-y = "cursive-serifless"
+y = "straight-turn-serifless"
 tittle = "square"
 diacritic-dot = "square"
 punctuation-dot = "square"
@@ -32,9 +32,10 @@ lig-equal-chain = "without-notch"
 lig-hyphen-chain = "without-notch"
 
 [buildPlans.IosevkaRain.variants.italic]
-f = "extended"
+f = "flat-hook-tailed"
 g = "single-storey-serifless"
-r = "serifless"
+r = "top-serifed"
+y = "cursive-serifless"
 
 [buildPlans.IosevkaRain.weights.Regular]
 shape = 400
