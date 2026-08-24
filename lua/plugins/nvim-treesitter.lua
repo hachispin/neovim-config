@@ -29,6 +29,32 @@ vim.api.nvim_create_autocmd("PackChanged", {
 	end,
 })
 
+local comment_fold_queries = {
+	"(comment)+ @fold",
+	"[(line_comment) (block_comment)]+ @fold",
+}
+
+local comment_folds_enabled = {}
+
+---@param language string
+local function enable_comment_folds(language)
+	if comment_folds_enabled[language] ~= nil then
+		return
+	end
+
+	for _, query in ipairs(comment_fold_queries) do
+		if pcall(vim.treesitter.query.parse, language, query) then
+			-- Keep the language's normal folds and add runs of line comments or a
+			-- single multi-line block comment as an extra fold.
+			vim.treesitter.query.set(language, "folds", "; extends\n" .. query)
+			comment_folds_enabled[language] = true
+			return
+		end
+	end
+
+	comment_folds_enabled[language] = false
+end
+
 -- From kickstart.nvim
 ---@param buf integer
 ---@param language string
@@ -43,6 +69,7 @@ local function treesitter_try_attach(buf, language)
 
 	-- Enable treesitter based folds
 	-- For more info on folds see `:help folds`
+	enable_comment_folds(language)
 	vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 	vim.wo.foldmethod = "expr"
 
