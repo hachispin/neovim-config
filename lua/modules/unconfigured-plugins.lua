@@ -1,7 +1,5 @@
 lazy_later(function()
 	vim.pack.add({
-		-- TODO: Stop using this patch once it's merged.
-		{ src = "https://github.com/ixti/nvim-treesitter-endwise", version = "nvim-0-11-compat" },
 		"https://github.com/Aasim-A/scrollEOF.nvim",
 		"https://github.com/lewis6991/gitsigns.nvim",
 		"https://github.com/mrcjkb/rustaceanvim",

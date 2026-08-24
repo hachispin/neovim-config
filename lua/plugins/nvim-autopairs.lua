@@ -4,9 +4,15 @@ lazy_on_event("InsertEnter", function()
 	local npairs = require("nvim-autopairs")
 	local Rule = require("nvim-autopairs.rule")
 	local cond = require("nvim-autopairs.conds")
+	local endwise = require("nvim-autopairs.ts-rule").endwise
 
 	npairs.setup({})
+	npairs.add_rules(require("nvim-autopairs.rules.endwise-lua"))
 	npairs.add_rules({
+		endwise("then$", "fi", "sh"),
+		endwise("do$", "done", "sh"),
+		endwise("^%s*case%s+.*%s+in$", "esac", "sh"),
+
 		Rule(" ", " ", { "sh", "bash", "zsh" }):with_pair(function(opts)
 			return opts.line:sub(opts.col - 1, opts.col) == "[]"
 		end):with_move(cond.done()),
