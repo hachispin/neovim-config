@@ -22,6 +22,7 @@ vim.o.showmode = false
 vim.o.signcolumn = "yes"
 vim.o.tabstop = 4
 vim.o.winborder = vim.g.neovide and "none" or "rounded"
+vim.wo.foldlevel = 99
 
 -- Line numbers (relative)
 vim.o.number = true
